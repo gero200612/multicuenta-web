@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Contenido Multicuenta</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Layout: banda oscura de portada con el ecosistema vivo; después secciones en una columna ancha, cada una con su gráfico propio. Paleta y tipos de la propuesta en PDF. */
+:root {
+  --bg: #FBF7F0; --bg2: #F3EBDD; --ink: #24173A; --muted: #655B72; --line: #DDD3C3;
+  --accent: #C98700; --accent-strong: #F2A900; --violet: #4A2F73;
+  --hero: #24173A; --hero2: #3A2660; --hero-fg: #FFFFFF; --hero-muted: #CFC4E2;
+  --ok: #2F7D5B; --off: #A8506B;
+  --f-display: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --f-body: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #17111F; --bg2: #221A2E; --ink: #F1EBF8; --muted: #B3A8C3; --line: #3A3048;
+  --accent: #F2B630; --accent-strong: #F2A900; --violet: #B49AE0;
+  --hero: #100B17; --hero2: #2A1C44; --hero-fg: #FFFFFF; --hero-muted: #C4B8D8;
+  --ok: #5FC195; --off: #E08AA2; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #17111F; --bg2: #221A2E; --ink: #F1EBF8; --muted: #B3A8C3; --line: #3A3048;
+  --accent: #F2B630; --accent-strong: #F2A900; --violet: #B49AE0;
+  --hero: #100B17; --hero2: #2A1C44; --hero-fg: #FFFFFF; --hero-muted: #C4B8D8;
+  --ok: #5FC195; --off: #E08AA2; color-scheme: dark }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; margin: 0; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.08; letter-spacing: -0.015em; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(28px, 4vw, 40px); }
+h3 { font-size: 19px; }
+p { margin: 0; }
+.eyebrow { font-family: var(--f-display); font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
+.lead { font-size: 18px; color: var(--muted); font-weight: 300; max-width: 62ch; }
+section.sec { padding-block: 72px; border-top: 1px solid var(--line); }
+section.sec .head { display: grid; gap: 12px; margin-bottom: 36px; }
+
+/* Portada */
+.hero { background: radial-gradient(120% 90% at 85% 10%, var(--hero2), var(--hero) 60%); color: var(--hero-fg); overflow: hidden; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 32px; align-items: center; padding-block: 64px 56px; }
+.hero .tipo { font-family: var(--f-display); font-size: 12px; letter-spacing: .25em; text-transform: uppercase; color: var(--accent-strong); font-weight: 600; }
+.hero .barra { width: 64px; height: 4px; background: var(--accent-strong); margin: 22px 0 22px; }
+.hero h1 { font-size: clamp(38px, 5.6vw, 64px); }
+.hero h1 span { color: var(--accent-strong); }
+.hero p.sub { margin-top: 22px; font-size: 18px; font-weight: 300; color: var(--hero-muted); max-width: 46ch; }
+.redes { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 8px 18px; font-family: var(--f-display); font-size: 14px; letter-spacing: .04em; }
+.redes span::before { content: "●"; color: var(--accent-strong); margin-right: 8px; font-size: 9px; vertical-align: 2px; }
+.eco { width: 100%; max-width: 100%; height: auto; display: block; }
+.eco .lbl { font-family: var(--f-body); font-size: 11.5px; fill: var(--hero-muted); }
+.eco .lblb { font-family: var(--f-display); font-size: 13px; font-weight: 700; fill: var(--hero-fg); }
+.eco .net { font-family: var(--f-mono); font-size: 9.5px; fill: var(--accent-strong); letter-spacing: .08em; }
+.eco .sat { cursor: pointer; }
+.eco .sat circle.n { fill: var(--hero2); stroke: rgba(255,255,255,.18); stroke-width: 1.5; transition: stroke .2s, fill .2s; }
+.eco .sat:hover circle.n, .eco .sat.on circle.n, .eco .sat:focus-visible circle.n { stroke: var(--accent-strong); stroke-width: 2.5; }
+.eco .sat:focus { outline: none; }
+.eco-nota { min-height: 3.2em; font-size: 14px; color: var(--hero-muted); border-left: 3px solid var(--accent-strong); padding-left: 12px; margin-top: 8px; }
+.eco-nota b { color: var(--hero-fg); font-weight: 600; }
+.leyenda { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12.5px; color: var(--hero-muted); margin-top: 10px; }
+.leyenda i { display: inline-block; width: 18px; height: 2px; vertical-align: 4px; margin-right: 6px; }
+
+/* Cinco partes */
+.partes { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; }
+.parte .n { font-family: var(--f-display); font-size: 40px; font-weight: 700; color: var(--accent); line-height: 1; }
+.parte b { display: block; font-family: var(--f-display); font-size: 18px; margin: 10px 0 6px; }
+.parte p { font-size: 14.5px; color: var(--muted); line-height: 1.5; }
+
+/* Ciclo */
+.ciclo { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 36px; align-items: center; margin-top: 44px; background: var(--bg2); border-radius: 20px; padding: 28px; }
+.rueda { width: 100%; max-width: 420px; height: auto; display: block; margin: 0 auto; }
+.rueda .paso { cursor: pointer; }
+.rueda .paso circle { fill: var(--bg); stroke: var(--line); stroke-width: 2; transition: fill .2s, stroke .2s; }
+.rueda .paso text { font-family: var(--f-display); font-weight: 700; font-size: 15px; fill: var(--ink); }
+.rueda .paso.on circle { fill: var(--ink); stroke: var(--ink); }
+.rueda .paso.on text { fill: var(--accent-strong); }
+.rueda .paso:focus { outline: none; }
+.rueda .paso:focus-visible circle { stroke: var(--accent); stroke-width: 3; }
+.rueda .arco { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 3 6; }
+.rueda .centro1 { font-family: var(--f-display); font-size: 15px; font-weight: 700; fill: var(--ink); }
+.rueda .centro2 { font-family: var(--f-body); font-size: 12px; fill: var(--muted); }
+.detalle .cuando { font-family: var(--f-mono); font-size: 12px; color: var(--accent); letter-spacing: .06em; text-transform: uppercase; }
+.detalle h3 { font-size: 26px; margin: 6px 0 12px; }
+.detalle p { color: var(--muted); }
+.detalle ul { margin: 14px 0 0; padding-left: 20px; color: var(--muted); font-size: 15px; }
+.detalle li { margin-bottom: 6px; }
+.detalle li::marker { color: var(--accent); }
+
+/* Una toma, tres versiones */
+.versiones { display: grid; grid-template-columns: minmax(0, .8fr) auto minmax(0, 2.4fr); gap: 20px; align-items: center; }
+.crudo { aspect-ratio: 9 / 16; max-width: 100%; border-radius: 18px; background: repeating-linear-gradient(135deg, var(--bg2) 0 10px, var(--bg) 10px 20px); border: 1px dashed var(--line); display: grid; place-items: center; text-align: center; padding: 12px; }
+.crudo b { font-family: var(--f-display); font-size: 17px; display: block; }
+.crudo span { font-size: 12.5px; color: var(--muted); }
+.flecha3 { font-family: var(--f-display); font-size: 30px; color: var(--accent); }
+.tres { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.tel { aspect-ratio: 9 / 16; max-width: 100%; border-radius: 18px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; color: #fff; position: relative; overflow: hidden; }
+.tel .red { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .1em; opacity: .85; }
+.tel .gancho { font-family: var(--f-display); font-weight: 700; font-size: clamp(13px, 1.6vw, 18px); line-height: 1.15; }
+.tel .meta { font-size: 11.5px; opacity: .9; display: grid; gap: 2px; }
+.tel.a { background: linear-gradient(170deg, #4A2F73, #24173A); }
+.tel.b { background: linear-gradient(170deg, #B86F00, #6E3C00); }
+.tel.c { background: linear-gradient(170deg, #2C5E63, #15343A); }
+.tel .barrita { height: 3px; border-radius: 2px; background: rgba(255,255,255,.3); overflow: hidden; }
+.tel .barrita i { display: block; height: 100%; width: 40%; background: #fff; animation: avance 4s linear infinite; }
+.tel.b .barrita i { animation-delay: -1.3s; }
+.tel.c .barrita i { animation-delay: -2.6s; }
+@keyframes avance { from { width: 0 } to { width: 100% } }
+.notas3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 36px; }
+.notas3 b { font-family: var(--f-display); font-size: 17px; display: block; margin-bottom: 4px; }
+.notas3 p { font-size: 14.5px; color: var(--muted); }
+
+/* Distribución */
+.dist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 48px; }
+.dist b { font-family: var(--f-display); font-size: 17px; display: block; margin-bottom: 4px; }
+.dist p { font-size: 15px; color: var(--muted); }
+.destacado { font-family: var(--f-display); font-size: clamp(19px, 2.4vw, 24px); line-height: 1.35; color: var(--violet); margin-top: 40px; max-width: 40ch; }
+
+/* Pauta */
+.pauta { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+.pasos { counter-reset: p; display: grid; gap: 18px; margin: 0; padding: 0; list-style: none; }
+.pasos li { counter-increment: p; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; }
+.pasos li::before { content: counter(p); font-family: var(--f-display); font-weight: 700; font-size: 22px; color: var(--accent); line-height: 1.2; }
+.pasos b { font-family: var(--f-display); display: block; }
+.pasos span { font-size: 15px; color: var(--muted); }
+.reparto { background: var(--bg2); border-radius: 20px; padding: 24px; }
+.reparto .tit { font-family: var(--f-display); font-weight: 700; font-size: 17px; }
+.reparto .sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.dias { display: flex; gap: 6px; margin: 18px 0 14px; flex-wrap: wrap; }
+.dias button { font: 600 13px var(--f-display); color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.dias button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.dias button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.barras { display: grid; gap: 12px; }
+.fila { display: grid; grid-template-columns: 92px minmax(0, 1fr) 44px; gap: 10px; align-items: center; font-size: 14px; }
+.fila .pista { height: 14px; background: var(--bg); border-radius: 7px; overflow: hidden; }
+.fila .pista i { display: block; height: 100%; border-radius: 7px; background: var(--accent); transition: width .7s cubic-bezier(.2,.8,.2,1), background .3s; }
+.fila.pausa .pista i { background: var(--off); }
+.fila .pct { font-family: var(--f-mono); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; }
+.reparto .que { margin-top: 16px; font-size: 14px; color: var(--muted); min-height: 3em; }
+.modos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 52px; border-top: 2px solid var(--ink); }
+.modo { padding: 18px 20px 4px 0; }
+.modo + .modo { padding-left: 20px; border-left: 1px solid var(--line); }
+.modo .nm { font-family: var(--f-display); font-weight: 700; font-size: 20px; }
+.modo p { font-size: 14.5px; color: var(--muted); margin-top: 6px; }
+.modo .cuando { font-size: 13px; color: var(--accent); margin-top: 8px; font-weight: 500; }
+.controles { margin-top: 28px; font-size: 15px; color: var(--muted); max-width: 75ch; }
+.controles b { color: var(--ink); font-weight: 600; }
+
+/* Medición */
+.ritmo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.ritmo .cada { font-family: var(--f-display); font-size: 30px; font-weight: 700; color: var(--accent); }
+.ritmo .mira { font-size: 15px; color: var(--muted); margin-top: 6px; }
+.ritmo .sale { margin-top: 12px; font-size: 15px; font-weight: 500; }
+.ritmo .sale::before { content: "→ "; color: var(--accent); }
+
+/* Agentes */
+.agentes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 36px; }
+.agente b { font-family: var(--f-display); font-size: 17px; display: block; margin-bottom: 4px; }
+.agente p { font-size: 14.5px; color: var(--muted); }
+.agente .tag { font-family: var(--f-mono); font-size: 11px; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; display: block; margin-bottom: 6px; }
+
+/* Cumplimiento */
+.reglas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 48px; }
+.reglas div { padding-top: 14px; border-top: 1px solid var(--line); }
+.reglas b { font-family: var(--f-display); font-size: 17px; display: block; margin-bottom: 4px; }
+.reglas p { font-size: 15px; color: var(--muted); }
+
+/* Cierre */
+.cierre { background: var(--hero); color: var(--hero-fg); }
+.cierre .wrap { padding-block: 72px; display: grid; gap: 18px; }
+.cierre h2 { max-width: 20ch; }
+.cierre p { color: var(--hero-muted); max-width: 64ch; font-size: 17px; }
+.cierre .pie { font-size: 13px; color: var(--hero-muted); margin-top: 24px; }
+
+@media (max-width: 900px) {
+  .hero .wrap, .ciclo, .pauta { grid-template-columns: minmax(0, 1fr); }
+  .partes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .agentes, .ritmo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .partes, .agentes, .ritmo, .dist, .reglas, .notas3, .modos { grid-template-columns: minmax(0, 1fr); }
+  .modo + .modo { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+  .versiones { grid-template-columns: minmax(0, 1fr); }
+  .crudo { aspect-ratio: auto; padding: 18px; }
+  .flecha3 { transform: rotate(90deg); justify-self: center; }
+  .tres { gap: 8px; }
+  .tel { padding: 8px; border-radius: 12px; }
+  section.sec { padding-block: 52px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tel .barrita i { animation: none; width: 60%; }
+  .fila .pista i { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="tipo">Propuesta de servicio</div>
+      <div class="barra"></div>
+      <h1>Administración Automática de Contenido <span>Multicuenta</span></h1>
+      <p class="sub">Un equipo en la calle y una plataforma de agentes de IA para crear, editar, publicar, pautar y medir el contenido del candidato, todos los días, con cada decisión apoyada en datos.</p>
+      <div class="redes"><span>YouTube</span><span>Instagram</span><span>Facebook</span><span>TikTok</span></div>
+    </div>
+    <div>
+      <svg class="eco" id="eco" viewBox="0 0 520 440" role="img" aria-label="Ecosistema de cuentas alrededor del candidato">
+        <defs>
+          <radialGradient id="halo"><stop offset="0" stop-color="#F2A900" stop-opacity=".35"/><stop offset="1" stop-color="#F2A900" stop-opacity="0"/></radialGradient>
+        </defs>
+        <g id="lineas"></g>
+        <g id="pulsos"></g>
+        <circle cx="260" cy="220" r="92" fill="url(#halo)"/>
+        <circle cx="260" cy="220" r="52" fill="#F2A900"/>
+        <text x="260" y="216" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="15" font-weight="700" fill="#24173A">Candidato</text>
+        <text x="260" y="234" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#24173A">figura principal</text>
+        <g id="sats"></g>
+      </svg>
+      <div class="leyenda"><span><i style="background:#F2A900"></i>versiones que salen a cada cuenta</span><span><i style="background:#FFFFFF"></i>lo que se viraliza vuelve a la figura principal</span></div>
+      <p class="eco-nota" id="ecoNota" aria-live="polite">Tocá una cuenta para ver qué publica.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="sec">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">El servicio</div>
+        <h2>Qué es y por qué</h2>
+        <p class="lead">Hoy una campaña se gana o se pierde en el celular, en videos de menos de un minuto. El candidato necesita estar todos los días en cuatro redes que premian cosas distintas, y su equipo rara vez tiene el tiempo, las herramientas y los datos para hacerlo bien.</p>
+      </div>
+      <div class="partes">
+        <div class="parte"><div class="n">01</div><b>Creación</b><p>Una persona acompaña al candidato y graba el material crudo, guiada por las métricas.</p></div>
+        <div class="parte"><div class="n">02</div><b>Edición</b><p>Cada toma se convierte en tres versiones, adaptadas a cada red y formato.</p></div>
+        <div class="parte"><div class="n">03</div><b>Distribución</b><p>Cada versión sale en la cuenta y el horario que corresponden, con las reglas de cada red.</p></div>
+        <div class="parte"><div class="n">04</div><b>Pauta</b><p>La inversión se mueve hacia las piezas, cuentas y redes que mejor rinden.</p></div>
+        <div class="parte"><div class="n">05</div><b>Medición</b><p>Todo se mide, se compara con referencias y vuelve como indicaciones para grabar.</p></div>
+      </div>
+
+      <div class="ciclo">
+        <svg class="rueda" id="rueda" viewBox="0 0 420 420" role="group" aria-label="El ciclo de cada día"></svg>
+        <div class="detalle" id="detalle" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">02 · Edición</div>
+        <h2>Una toma, tres versiones</h2>
+        <p class="lead">Cada toma cruda sale en tres versiones distintas del mismo video, y cada una se adapta a la red donde se publica. Así se prueba qué funciona mejor sin grabar más.</p>
+      </div>
+      <div class="versiones">
+        <div class="crudo"><div><b>Toma cruda</b><span>Recorrida por el barrio, 4 minutos de material</span></div></div>
+        <div class="flecha3" aria-hidden="true">→</div>
+        <div class="tres">
+          <div class="tel a"><div class="red">REELS · 9:16</div><div class="gancho">«Esto me lo dijeron hoy en la puerta de una escuela»</div><div class="meta"><span>Gancho: frase de un vecino</span><span>Subtítulos grandes · 38 s</span><div class="barrita"><i></i></div></div></div>
+          <div class="tel b"><div class="red">TIKTOK · 9:16</div><div class="gancho">Tres cosas que vimos en 10 cuadras</div><div class="meta"><span>Gancho: lista rápida</span><span>Sonido en tendencia · 24 s</span><div class="barrita"><i></i></div></div></div>
+          <div class="tel c"><div class="red">SHORTS · 9:16</div><div class="gancho">La recorrida completa, sin cortes de más</div><div class="meta"><span>Gancho: plano del lugar</span><span>Narración · 55 s</span><div class="barrita"><i></i></div></div></div>
+        </div>
+      </div>
+      <div class="notas3">
+        <div><b>Que no se parezcan</b><p>Las tres cambian el gancho, el estilo visual, el sonido y el orden de las escenas. La plataforma no deja salir dos versiones demasiado parecidas.</p></div>
+        <div><b>Doble control</b><p>Un control técnico busca pantallas vacías, textos ilegibles o cortes rotos. Después un crítico visual puntúa gancho, legibilidad y coherencia. Lo que no llega al piso se rehace solo.</p></div>
+        <div><b>El equipo aprueba</b><p>Cada versión pasa por el equipo de campaña, que marca «me gusta» o «no me gusta» con un comentario. La plataforma aprende de esas opiniones.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">03 · Distribución</div>
+        <h2>Un ecosistema alrededor de una figura</h2>
+        <p class="lead">El equipo gestiona todas las cuentas del ecosistema en YouTube, Instagram, Facebook y TikTok. El candidato no tiene que ocuparse de su cuenta: solo interviene, si quiere, para volver a subir lo que se viraliza.</p>
+      </div>
+      <div class="dist">
+        <div><b>Cuentas vinculadas</b><p>Cada cuenta se conecta con el permiso de su dueño, por la vía oficial de cada red. La plataforma nunca guarda contraseñas.</p></div>
+        <div><b>Identidad propia</b><p>Cada cuenta mantiene su voz y su público, y recibe su propia versión del contenido. Las redes bajan el alcance de lo repetido.</p></div>
+        <div><b>Tiempos entre publicaciones</b><p>Dos cuentas nunca publican lo mismo a la vez, y cada pieza sale en la franja en la que ese público está activo.</p></div>
+        <div><b>Mensajes y comentarios</b><p>Un asistente responde con la información aprobada por la campaña, oculta spam e insultos y avisa al equipo de lo que necesita una persona.</p></div>
+      </div>
+      <p class="destacado">Solo cuentas reales e identificadas. Nada de cuentas falsas o anónimas para simular apoyo.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">04 · Pauta</div>
+        <h2>La pauta va a lo que rinde</h2>
+        <p class="lead">La pauta es la inversión en anuncios para que una pieza llegue a más gente del público elegido. Se mueve todos los días entre redes, cuentas y piezas, según lo que funciona.</p>
+      </div>
+      <div class="pauta">
+        <ol class="pasos">
+          <li><div><b>Prueba chica primero</b><span>Cada pieza arranca con una inversión de prueba en sus tres versiones y en públicos distintos.</span></div></li>
+          <li><div><b>Mide lo que importa</b><span>Retención en los primeros segundos, videos vistos completos, compartidos, comentarios y seguidores nuevos.</span></div></li>
+          <li><div><b>Reparte por probabilidad</b><span>Un modelo estadístico estima qué combinación tiene más chances de rendir y le da más presupuesto, sin dejar de probar.</span></div></li>
+          <li><div><b>Corta lo que no anda</b><span>Lo que queda claramente por debajo se pausa y ese presupuesto pasa a lo que funciona.</span></div></li>
+        </ol>
+        <div class="reparto">
+          <div class="tit">Cómo se reparte una pieza</div>
+          <div class="sub">Ejemplo ilustrativo: parte del presupuesto de la pieza que va a cada versión.</div>
+          <div class="dias" role="group" aria-label="Día">
+            <button type="button" id="d1" data-d="0" aria-pressed="true">Día 1</button>
+            <button type="button" id="d2" data-d="1" aria-pressed="false">Día 2</button>
+            <button type="button" id="d3" data-d="2" aria-pressed="false">Día 4</button>
+          </div>
+          <div class="barras" id="barras"></div>
+          <p class="que" id="que" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="modos">
+        <div class="modo"><div class="nm">Consejos</div><p>Analiza y recomienda; no toca nada.</p><div class="cuando">El arranque, para ganar confianza</div></div>
+        <div class="modo"><div class="nm">Con permiso</div><p>Prepara cada cambio y espera el sí del responsable.</p><div class="cuando">La operación normal</div></div>
+        <div class="modo"><div class="nm">Automático</div><p>Ajusta sola dentro de los topes que fijó la campaña.</p><div class="cuando">Picos de campaña</div></div>
+      </div>
+      <p class="controles"><b>Controles que no se apagan:</b> topes de gasto diarios y totales por red y por cuenta, alertas ante gastos fuera de lo normal, registro de cada cambio con su motivo y aviso de «pagado por» en cada anuncio político.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">05 · Medición</div>
+        <h2>Cada número vuelve como una indicación</h2>
+        <p class="lead">Las métricas no terminan en un informe: se convierten en qué grabar, cómo editar y dónde pautar.</p>
+      </div>
+      <div class="ritmo">
+        <div><div class="cada">Cada día</div><p class="mira">Retención, compartidos y comentarios de cada pieza en sus primeras horas.</p><p class="sale">Qué grabar hoy y los ajustes de pauta</p></div>
+        <div><div class="cada">Cada semana</div><p class="mira">Qué temas, ganchos, formatos y horarios rindieron en cada red y cada cuenta.</p><p class="sale">El plan de contenido de la semana</p></div>
+        <div><div class="cada">Cada mes</div><p class="mira">Crecimiento de cada cuenta, alcance en el público objetivo y conversación sobre el candidato.</p><p class="sale">El informe para la conducción</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">La plataforma</div>
+        <h2>Qué hace cada parte</h2>
+        <p class="lead">Cada agente se encarga de una parte del trabajo y todos comparten la misma memoria de lo que funciona.</p>
+      </div>
+      <div class="agentes">
+        <div class="agente"><span class="tag">Ideas y guion</span><b>Agente de contenido</b><p>Propone ideas y un plan mensual, escribe el guion de las tres versiones y las rehace si no pasan los controles.</p></div>
+        <div class="agente"><span class="tag">Video</span><b>Edición y render</b><p>Transcribe, corta y subtitula el crudo, y arma cada versión con la marca, el texto en pantalla y el sonido.</p></div>
+        <div class="agente"><span class="tag">Calidad</span><b>Crítico visual</b><p>Mira los cuadros de cada video y lo puntúa: gancho, legibilidad, jerarquía y coherencia con la marca.</p></div>
+        <div class="agente"><span class="tag">Cuentas</span><b>Publicación</b><p>Conecta las cuentas por la vía oficial y programa cada versión en su cuenta y su horario.</p></div>
+        <div class="agente"><span class="tag">Anuncios</span><b>Agente de pauta</b><p>Prueba anuncios, reparte el presupuesto según resultados y pausa lo que no rinde, siempre con topes.</p></div>
+        <div class="agente"><span class="tag">Conversación</span><b>Asistente de mensajes</b><p>Contesta con información aprobada. Un verificador frena promesas, datos inventados y pedidos de datos personales.</p></div>
+        <div class="agente"><span class="tag">Afuera</span><b>Tendencias y referencias</b><p>Releva sonidos, preguntas y formatos virales, y analiza los videos exitosos de cuentas de referencia.</p></div>
+        <div class="agente"><span class="tag">Memoria</span><b>Aprendizajes</b><p>Guarda lo que rindió y lo que el equipo aprobó o rechazó, y lo trae por parecido en la próxima pieza.</p></div>
+        <div class="agente"><span class="tag">En vivo</span><b>Panel de seguimiento</b><p>Muestra qué está haciendo cada agente, cada video, las métricas y la pauta.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Cumplimiento</div>
+        <h2>Las reglas se controlan antes de publicar</h2>
+        <p class="lead">En una campaña, un error de reglas cuesta más que un video flojo: puede bajar una cuenta o abrir una denuncia.</p>
+      </div>
+      <div class="reglas">
+        <div><b>Propaganda política</b><p>Meta y Google exigen verificar al anunciante y mostrar quién paga. TikTok no acepta pauta política: ahí el crecimiento es solo orgánico.</p></div>
+        <div><b>Calendario electoral</b><p>Inicio de campaña, límites para la publicidad y veda se cargan como fechas que bloquean lo que no corresponda. Se validan con el asesor legal.</p></div>
+        <div><b>Contenido real</b><p>Material grabado del candidato. No se generan voces ni caras sintéticas, y cualquier recurso hecho con IA se identifica como pide cada red.</p></div>
+        <div><b>Datos personales</b><p>Lo que escribe la gente se trata según la Ley 25.326. Los datos personales se tapan antes de procesarlos.</p></div>
+        <div><b>Políticas de cada red</b><p>Formatos, frecuencia, música con licencia y normas de comunidad, cargados y controlados antes de cada publicación.</p></div>
+        <div><b>Todo queda registrado</b><p>Qué se publicó, quién lo aprobó, qué se pautó y por qué.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="cierre">
+  <div class="wrap">
+    <div class="eyebrow">En resumen</div>
+    <h2>Qué recibe la campaña</h2>
+    <p>La persona que acompaña y graba al candidato, la edición y publicación diaria en las cuatro redes, la gestión de pauta, la atención de mensajes y comentarios, acceso al panel para ver todo en vivo, e informes semanales y mensuales.</p>
+    <div class="pie">Noviembre de 2026</div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- Ecosistema ----
+  const cuentas = [
+    { n: 'Oficial', d: 'del candidato', redes: 'YT IG FB TT', t: 'La cuenta del candidato. La maneja el equipo; él solo vuelve a subir lo que se viraliza en el resto del ecosistema.' },
+    { n: 'Clips', d: 'cortes del día', redes: 'IG TT YT', t: 'Los mejores momentos del día en cortes de 15 a 30 segundos, con subtítulos grandes.' },
+    { n: 'Propuestas', d: 'temas y datos', redes: 'IG FB YT', t: 'Una propuesta por pieza, explicada simple, con el dato que la respalda.' },
+    { n: 'Recorridas', d: 'calle y barrio', redes: 'IG TT FB', t: 'Lo que pasa en la calle: vecinos, lugares y respuestas cortas a cámara.' },
+    { n: 'Equipo', d: 'detrás de escena', redes: 'IG TT', t: 'El día a día del equipo de campaña, con un tono más cercano.' },
+    { n: 'Distrito', d: 'noticias locales', redes: 'FB IG', t: 'Lo que pasa en el distrito y cómo se relaciona con la campaña.' },
+  ];
+  const svg = document.getElementById('eco');
+  const lineas = document.getElementById('lineas'), pulsos = document.getElementById('pulsos'), sats = document.getElementById('sats');
+  const nota = document.getElementById('ecoNota');
+  const C = { x: 260, y: 220 }, R = 168;
+  const pos = cuentas.map((c, i) => { const a = -Math.PI / 2 + i * 2 * Math.PI / cuentas.length; return { x: C.x + R * Math.cos(a), y: C.y + R * 0.92 * Math.sin(a) }; });
+  pos.forEach(p => el('line', { x1: C.x, y1: C.y, x2: p.x, y2: p.y, stroke: 'rgba(255,255,255,.14)', 'stroke-width': 1.5 }, lineas));
+  const nodos = cuentas.map((c, i) => {
+    const p = pos[i];
+    const g = el('g', { class: 'sat', tabindex: 0, role: 'button', 'aria-label': 'Cuenta ' + c.n }, sats);
+    el('circle', { class: 'n', cx: p.x, cy: p.y, r: 40 }, g);
+    const t1 = el('text', { class: 'lblb', x: p.x, y: p.y - 5, 'text-anchor': 'middle' }, g); t1.textContent = c.n;
+    const t2 = el('text', { class: 'lbl', x: p.x, y: p.y + 10, 'text-anchor': 'middle' }, g); t2.textContent = c.d;
+    const t3 = el('text', { class: 'net', x: p.x, y: p.y + 56, 'text-anchor': 'middle' }, g); t3.textContent = c.redes;
+    const elegir = () => { nodos.forEach(n => n.classList.remove('on')); g.classList.add('on'); nota.innerHTML = '<b>' + c.n + '.</b> ' + c.t; };
+    g.addEventListener('click', elegir);
+    g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); elegir(); } });
+    return g;
+  });
+
+  // Pulsos: salen versiones a las cuentas; de vez en cuando una se viraliza y vuelve al centro.
+  const puntos = [];
+  const lanzar = (i, vuelve) => {
+    const c = el('circle', { r: vuelve ? 6 : 4.5, fill: vuelve ? '#FFFFFF' : '#F2A900' }, pulsos);
+    puntos.push({ c, i, vuelve, t: 0 });
+  };
+  let ultimo = 0, n = 0;
+  const cuadro = ts => {
+    if (ts - ultimo > 650) { ultimo = ts; n++; const i = n % cuentas.length; lanzar(i, n % 7 === 0); }
+    for (let k = puntos.length - 1; k >= 0; k--) {
+      const p = puntos[k]; p.t += 0.012;
+      const a = p.vuelve ? pos[p.i] : C, b = p.vuelve ? C : pos[p.i];
+      const e = p.t < 1 ? p.t : 1;
+      p.c.setAttribute('cx', a.x + (b.x - a.x) * e); p.c.setAttribute('cy', a.y + (b.y - a.y) * e);
+      p.c.setAttribute('opacity', p.t < .85 ? 1 : Math.max(0, (1 - p.t) / .15));
+      if (p.t >= 1) { p.c.remove(); puntos.splice(k, 1); }
+    }
+    requestAnimationFrame(cuadro);
+  };
+  if (!reduce) requestAnimationFrame(cuadro);
+
+  // ---- Ciclo del día ----
+  const pasos = [
+    { t: 'Grabar', h: 'Mañana', p: 'La persona del equipo sigue al candidato con la lista de qué conviene capturar hoy.', l: ['Actos, recorridas y respuestas cortas a cámara', 'Ideas con el gancho y el guion escena por escena', 'Dentro de los límites que fijó la campaña'] },
+    { t: 'Editar', h: 'Mediodía', p: 'Cada toma se convierte en tres versiones, cada una adaptada a su red.', l: ['Cambian gancho, estilo, sonido y orden', 'Subtítulos, texto en pantalla y portada por red', 'Colores, tipografía y logo de la campaña'] },
+    { t: 'Revisar', h: 'Antes de salir', p: 'Control técnico, crítico visual y aprobación del equipo de campaña.', l: ['Nada de pantallas vacías ni textos ilegibles', 'Puntaje de gancho, legibilidad y coherencia', '«Me gusta» o «no me gusta» con comentario'] },
+    { t: 'Publicar', h: 'Tarde', p: 'Cada cuenta recibe su versión, en el horario en que su público está activo.', l: ['Dos cuentas nunca publican lo mismo a la vez', 'Reglas y límites de cada red controlados', 'Lo viral vuelve a la cuenta del candidato'] },
+    { t: 'Pautar', h: 'Tarde y noche', p: 'Prueba chica en cada versión y más inversión a lo que rinde.', l: ['Públicos distintos por zona, edad e intereses', 'Lo que queda por debajo se pausa', 'Siempre dentro de los topes de la campaña'] },
+    { t: 'Medir', h: 'Noche', p: 'Lo que se mide a la noche es la lista de qué grabar a la mañana siguiente.', l: ['Retención, vistos completos y compartidos', 'Comparación con cuentas de referencia', 'Lo aprendido queda en la memoria'] },
+  ];
+  const rueda = document.getElementById('rueda'), det = document.getElementById('detalle');
+  const RC = { x: 210, y: 210 }, RR = 150;
+  el('circle', { class: 'arco', cx: RC.x, cy: RC.y, r: RR }, rueda);
+  const c1 = el('text', { class: 'centro1', x: RC.x, y: RC.y - 4, 'text-anchor': 'middle' }, rueda); c1.textContent = 'Todos los días';
+  const c2 = el('text', { class: 'centro2', x: RC.x, y: RC.y + 16, 'text-anchor': 'middle' }, rueda); c2.textContent = 'lo medido vuelve a la grabación';
+  let actual = 0, auto = !reduce, timer;
+  const gs = pasos.map((s, i) => {
+    const a = -Math.PI / 2 + i * 2 * Math.PI / pasos.length;
+    const x = RC.x + RR * Math.cos(a), y = RC.y + RR * Math.sin(a);
+    const g = el('g', { class: 'paso', tabindex: 0, role: 'button', 'aria-label': (i + 1) + '. ' + s.t }, rueda);
+    el('circle', { cx: x, cy: y, r: 44 }, g);
+    const t = el('text', { x, y: y + 5, 'text-anchor': 'middle' }, g); t.textContent = s.t;
+    const ir = () => { auto = false; clearInterval(timer); mostrar(i); };
+    g.addEventListener('click', ir);
+    g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ir(); } });
+    return g;
+  });
+  const mostrar = i => {
+    actual = i; gs.forEach((g, k) => g.classList.toggle('on', k === i));
+    const s = pasos[i];
+    det.innerHTML = '<div class="cuando">' + (i + 1) + ' de 6 · ' + s.h + '</div><h3>' + s.t + '</h3><p>' + s.p + '</p><ul>' + s.l.map(x => '<li>' + x + '</li>').join('') + '</ul>';
+  };
+  mostrar(0);
+  if (auto) timer = setInterval(() => mostrar((actual + 1) % pasos.length), 4200);
+
+  // ---- Reparto de pauta ----
+  const dias = [
+    { v: [34, 33, 33], q: 'Arranque parejo: las tres versiones reciben lo mismo para ver cuál engancha.' },
+    { v: [22, 58, 20], q: 'La versión B retiene más en los primeros segundos: recibe más, sin dejar de probar las otras.' },
+    { v: [0, 82, 18], q: 'La versión A quedó claramente por debajo y se pausó. Su parte pasó a B; C sigue en prueba.' },
+  ];
+  const nombres = ['Versión A', 'Versión B', 'Versión C'];
+  const barras = document.getElementById('barras'), que = document.getElementById('que');
+  const filas = nombres.map(nm => {
+    const f = document.createElement('div'); f.className = 'fila';
+    f.innerHTML = '<span>' + nm + '</span><div class="pista"><i style="width:0"></i></div><span class="pct">0 %</span>';
+    barras.appendChild(f); return f;
+  });
+  const dia = d => {
+    document.querySelectorAll('.dias button').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.d === d)));
+    dias[d].v.forEach((v, i) => {
+      filas[i].querySelector('i').style.width = v + '%';
+      filas[i].querySelector('.pct').textContent = v === 0 ? 'pausa' : v + ' %';
+      filas[i].classList.toggle('pausa', v === 0);
+    });
+    que.textContent = dias[d].q;
+  };
+  document.querySelectorAll('.dias button').forEach(b => b.addEventListener('click', () => dia(+b.dataset.d)));
+  dia(0);
+})();
+</script>
+</body>
+</html>
