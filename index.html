@@ -480,11 +480,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
           </div>
         </div>
       </div>
-      <div class="ctrl" id="ctrlDemo">
-        <div class="pasos-demo" id="pasos" role="group" aria-label="Partes de la demo"></div>
-        <button class="btn sm" type="button" id="pausa" aria-pressed="false">Pausar</button>
-      </div>
-      <div class="titulo-h">
+      <div class="titulo-h" id="tituloH">
         <h1>Agentes multicuenta</h1>
         <p>Se graba una vez. Se publica en todo el ecosistema.</p>
         <div class="apps" aria-label="YouTube, Instagram, Facebook, TikTok y WhatsApp"><svg><use href="#i-yt"/></svg><svg><use href="#i-ig"/></svg><svg><use href="#i-fb"/></svg><svg><use href="#i-tt"/></svg><svg><use href="#i-wa"/></svg></div>
@@ -784,7 +780,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   ];
 
   // ---------- reloj único: todas las animaciones se pausan y se ubican en el tiempo ----------
-  const navs = $('navs'), pane = $('pane'), pasos = $('pasos');
+  const navs = $('navs'), pane = $('pane'), pasos = document.createElement('div'), pausa = document.createElement('button');
   const logo = () => `<span class="marca"><svg><use href="#logo"/></svg>Multicuenta</span>`;
   const INTRO = { kind: 'tapa', dur: 3.6, html: () => `${logo()}<h3>Administración automática de contenido multicuenta</h3><p>Se graba una vez. Se publica en todo el ecosistema del candidato.</p>` };
   const OUTRO = { kind: 'tapa', fin: true, dur: 5.5, html: () => `${logo()}<h3 style="font-size:7.4cqw">Presente todos los días, en todas las redes</h3><div class="apps-r">${['yt', 'ig', 'fb', 'tt', 'wa'].map((k, i) => `<span style="--d:${.9 + i * .18}s">${red(k)}</span>`).join('')}</div>` };
@@ -863,14 +859,14 @@ button { font: inherit; color: inherit; cursor: pointer; }
   };
 
   const botones = () => {
-    $('pausa').textContent = playing ? 'Pausar' : 'Reproducir';
-    $('pausa').setAttribute('aria-pressed', String(!playing));
+    pausa.textContent = playing ? 'Pausar' : 'Reproducir';
+    pausa.setAttribute('aria-pressed', String(!playing));
     $('pp').textContent = playing ? '❚❚' : '▶';
     $('pp').setAttribute('aria-label', playing ? 'Pausar' : 'Reproducir');
   };
   const alternar = () => { if (!playing && enReel && t >= total - 0.01) t = 0; playing = !playing; botones(); };
   const irEscena = k => { const i = segs.findIndex(s => s.s === scenes[k]); t = starts[i] + 0.001; cur = -1; };
-  $('pausa').addEventListener('click', alternar);
+  pausa.addEventListener('click', alternar);
   $('pp').addEventListener('click', alternar);
   $('barra').addEventListener('input', e => { t = Math.min(total - 0.001, (+e.target.value / 1000) * total); });
   document.querySelectorAll('[data-ir]').forEach(b => b.addEventListener('click', () => { irEscena(+b.dataset.ir); $('demo').scrollIntoView({ behavior: 'smooth', block: 'center' }); }));
@@ -927,7 +923,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
     try { history.replaceState(null, '', location.pathname + location.search + '#reel'); } catch (e) {}
   };
   const cerrarReel = () => {
-    enReel = false; demo.insertBefore(ventana, $('ctrlDemo')); reel.hidden = true; ctl.hidden = true; tapa.hidden = true;
+    enReel = false; demo.insertBefore(ventana, $('tituloH')); reel.hidden = true; ctl.hidden = true; tapa.hidden = true;
     document.body.style.overflow = '';
     armar(segHome); t = 0; playing = !reduce; botones();
     try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
