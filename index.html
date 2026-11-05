@@ -8,16 +8,17 @@
 <meta name="description" content="Administración Automática de Contenido Multicuenta: un equipo en la calle y una plataforma de agentes de IA para crear, editar, publicar, pautar y medir el contenido de un candidato.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@500;600&display=swap">
 <style>
-/* Una sola mirada clara, la de la app: lateral azul noche, superficies blancas, azul y verde de acento. La demo de la app es el centro; el texto, plano. */
+/* Una sola mirada clara, la del panel: lateral azul noche, superficies blancas, azul y verde de acento. El sistema es lo que se muestra, lo más grande posible. */
 :root {
   color-scheme: light;
   --navy: #16163f; --navy-2: #22225a; --blue: #000bd6; --blue-2: #3842f3; --sky: #5970ff;
   --green: #00e281; --green-ink: #00794a; --amber: #b86e00; --red: #c62b3b;
   --bg: #f3f4f9; --surface: #ffffff; --ink: #16163f; --muted: #5f6080; --faint: #8f90a8; --line: #e2e3ee; --line-2: #eef0f7;
   --side-ink: #c9cbea; --side-muted: #a9acd6;
-  --f: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'Geist Mono', ui-monospace, Menlo, monospace;
   --r: 12px;
 }
 *, *::before, *::after { box-sizing: border-box; }
@@ -31,40 +32,36 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* ---------- Encabezado ---------- */
 .top { background: var(--navy); color: #fff; }
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; }
-.marca { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: -0.02em; color: #fff; text-decoration: none; }
+.marca { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 19px; letter-spacing: -0.02em; color: #fff; text-decoration: none; }
 .marca svg { flex: none; }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 600; font-size: 15px; white-space: nowrap; text-decoration: none; transition: background .15s, border-color .15s, transform .15s; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 600; font-size: 15px; white-space: nowrap; text-decoration: none; transition: background .15s, border-color .15s; }
 .btn:hover { background: var(--line-2); }
 .btn.green { background: var(--green); border-color: var(--green); color: var(--navy); }
 .btn.green:hover { background: #1bf195; border-color: #1bf195; }
-.btn.blue { background: var(--blue); border-color: var(--blue); color: #fff; }
-.btn.blue:hover { background: var(--blue-2); border-color: var(--blue-2); }
 .btn.line { background: transparent; border-color: rgba(255,255,255,.28); color: #fff; }
 .btn.line:hover { background: rgba(255,255,255,.08); }
 .btn.sm { height: 34px; padding: 0 12px; font-size: 13.5px; border-radius: 8px; }
 
-.hero { background: linear-gradient(var(--navy) 0 62%, var(--bg) 62%); color: #fff; }
-.hero .wrap { padding-block: 40px 56px; display: grid; gap: 36px; }
+.hero { background: linear-gradient(var(--navy) 0 58%, var(--bg) 58%); color: #fff; }
+.hero .wrap { padding-block: 36px 56px; display: grid; gap: 34px; }
 .hero .txt { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px 56px; align-items: end; }
-.kicker { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green); }
-.hero h1 { font-size: clamp(36px, 5.4vw, 66px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 800; margin-top: 14px; text-wrap: balance; }
-.hero h1 em { font-style: normal; color: var(--green); }
+.kicker { font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--green); }
+.hero h1 { font-size: clamp(36px, 5.2vw, 64px); line-height: 1.02; letter-spacing: -0.04em; font-weight: 700; margin-top: 14px; text-wrap: balance; }
 .hero .sub { color: var(--side-ink); font-size: 18px; max-width: 46ch; }
 .hero .ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-.redes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
-.redes span { font-size: 12.5px; font-weight: 600; color: var(--side-ink); background: rgba(255,255,255,.08); border-radius: 999px; padding: 4px 11px; }
+.apps { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.apps svg { width: 30px; height: 30px; }
 
 /* ---------- La app ---------- */
 .ventana { background: var(--surface); border-radius: 16px; box-shadow: 0 30px 80px rgba(10, 10, 40, .35), 0 0 0 1px rgba(22,22,63,.08); overflow: hidden; color: var(--ink); }
-.barra-v { display: flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px; background: #ecedf5; border-bottom: 1px solid var(--line); }
+.barra-v { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 14px; background: #ecedf5; border-bottom: 1px solid var(--line); }
 .barra-v i { width: 11px; height: 11px; border-radius: 50%; background: #d3d5e4; }
-.barra-v .url { margin-left: 12px; flex: 1; max-width: 360px; height: 24px; border-radius: 6px; background: #fff; font-size: 12px; color: var(--muted); display: flex; align-items: center; padding: 0 10px; }
 .app { container-type: inline-size; }
-.app-in { display: grid; grid-template-columns: 210px minmax(0, 1fr); height: 600px; }
+.app-in { display: grid; grid-template-columns: 214px minmax(0, 1fr); height: 660px; }
 .side { background: var(--navy); color: #fff; padding: 20px 12px; display: flex; flex-direction: column; gap: 2px; }
-.side .marca { font-size: 15.5px; padding: 0 8px 18px; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,.1); }
+.side .marca { font-size: 16px; padding: 0 8px 18px; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,.1); }
 #navs { display: flex; flex-direction: column; gap: 2px; }
-.nav { position: relative; display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 10px; border-radius: 9px; color: var(--side-ink); font-weight: 500; font-size: 14px; border: 0; background: transparent; text-align: left; width: 100%; }
+.nav { position: relative; display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 10px; border-radius: 9px; color: var(--side-ink); font-weight: 500; font-size: 14.5px; border: 0; background: transparent; text-align: left; width: 100%; }
 .nav:hover { background: rgba(255,255,255,.07); color: #fff; }
 .nav.on { background: rgba(89,112,255,.22); color: #fff; }
 .nav.on::before { content: ''; position: absolute; left: -12px; top: 8px; bottom: 8px; width: 4px; border-radius: 0 4px 4px 0; background: var(--green); }
@@ -74,17 +71,14 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .av { width: 30px; height: 30px; border-radius: 50%; background: var(--sky); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 12.5px; flex: none; }
 
 .main { min-width: 0; display: flex; flex-direction: column; background: var(--bg); }
-.tbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 24px; border-bottom: 1px solid var(--line); background: rgba(243,244,249,.95); }
-.tbar h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
-.tbar p { font-size: 13px; color: var(--muted); margin-top: 1px; }
-.vivo { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; color: var(--green-ink); background: #d6f8e8; border-radius: 999px; padding: 5px 11px; white-space: nowrap; }
-.vivo::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #00b867; animation: latido 1.4s ease-in-out infinite; }
-@keyframes latido { 50% { opacity: .25; } }
-.pane { flex: 1; min-height: 0; overflow: hidden; padding: 20px 24px; position: relative; }
-.prog { height: 3px; background: var(--line); }
+.tbar { padding: 22px 26px 18px; background: var(--surface); border-bottom: 1px solid var(--line); }
+.tbar h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+.tbar p { font-size: 14px; color: var(--muted); margin-top: 4px; }
+.prog { height: 3px; background: var(--line); flex: none; }
 .prog i { display: block; height: 100%; width: 0; background: var(--blue-2); }
+.pane { flex: 1; min-height: 0; overflow: hidden; padding: 20px 24px; position: relative; }
 
-/* bloques de la app */
+/* bloques */
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; min-width: 0; }
 .card-h { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
 .card-h b { font-size: 14.5px; font-weight: 700; }
@@ -96,132 +90,168 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .chip.ambar { background: #fff1d6; color: #8a5300; }
 .chip.violeta { background: #e9e0ff; color: #5a2fc0; }
 .chip.gris { background: #eef0f7; color: #7a7b96; }
-.dos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 16px; height: 100%; }
+.dos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 16px; }
 
-/* aparición escalonada: cada elemento trae su --d */
+/* Todas las animaciones las maneja el reloj de la demo (se pausan y se ubican en el tiempo). */
 .in { animation: aparece .45s cubic-bezier(.2,.8,.2,1) var(--d, 0s) both; }
 @keyframes aparece { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 .pop { animation: pop .35s cubic-bezier(.2,1.4,.4,1) var(--d, 0s) both; }
 @keyframes pop { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+@keyframes llenar { to { width: 100%; } }
+@keyframes sale { to { opacity: 0; visibility: hidden; } }
+@keyframes entra { to { opacity: 1; } }
+@keyframes latido { 50% { opacity: .25; } }
 
 /* Contenido */
-.log { display: grid; gap: 10px; }
+.log { display: grid; gap: 11px; padding: 0; margin: 0; }
 .log li { list-style: none; display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 8px; font-size: 13.5px; }
-.log { padding: 0; margin: 0; }
 .log .ic { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: #d6f8e8; color: var(--green-ink); font-size: 11px; font-weight: 800; }
 .log .ic.run { background: #e3e6ff; color: var(--blue-2); }
 .log .det { color: var(--muted); font-size: 12px; }
 .barrita { height: 6px; border-radius: 3px; background: var(--line-2); overflow: hidden; margin-top: 5px; }
-.barrita i { display: block; height: 100%; width: 0; background: var(--blue-2); border-radius: 3px; animation: llenar var(--t, 2s) linear var(--d, 0s) forwards; }
-@keyframes llenar { to { width: 100%; } }
+.barrita i { display: block; height: 100%; width: 0; background: var(--blue-2); border-radius: 3px; animation: llenar var(--t, 2s) linear var(--d, 0s) both; }
 .tels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.tel { border-radius: 14px; aspect-ratio: 9 / 16; max-width: 100%; color: #fff; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
-.tel .red { font-size: 10px; font-weight: 700; letter-spacing: .1em; opacity: .9; }
-.tel .g { font-weight: 800; font-size: clamp(11px, 1.35cqi, 15px); line-height: 1.15; letter-spacing: -0.01em; }
-.tel .s { display: block; font-size: 10.5px; opacity: .9; }
-.tel.a { background: linear-gradient(165deg, #3842f3, #16163f); }
-.tel.b { background: linear-gradient(165deg, #00a862, #0b3b33); }
-.tel.c { background: linear-gradient(165deg, #5a2fc0, #22225a); }
+.tel { border-radius: 14px; aspect-ratio: 9 / 16; max-width: 100%; color: #fff; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; background: var(--navy) center / cover no-repeat; }
+.tel::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,8,30,.55) 0%, rgba(8,8,30,0) 30%, rgba(8,8,30,0) 45%, rgba(8,8,30,.88) 100%); }
+.tel > * { position: relative; }
+.tel .red { font-size: 10px; font-weight: 700; letter-spacing: .1em; }
+.tel .g { font-weight: 700; font-size: clamp(12px, 1.4cqi, 15px); line-height: 1.15; letter-spacing: -0.01em; text-shadow: 0 1px 8px rgba(0,0,0,.5); }
+.tel .s { display: block; font-size: 10.5px; opacity: .92; }
 .tel .play { height: 3px; margin-top: 6px; background: rgba(255,255,255,.3); border-radius: 2px; overflow: hidden; }
 .tel .play i { display: block; height: 100%; width: 0; background: #fff; animation: llenar 3s linear var(--d, 0s) infinite; }
 .nota { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-top: 8px; }
-.nota .pt { font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.nota .pt { font-family: var(--mono); font-size: 12px; font-weight: 600; }
 .voto { display: flex; gap: 6px; margin-top: 6px; }
 .voto span { flex: 1; white-space: nowrap; height: 28px; border-radius: 7px; border: 1px solid var(--line); display: grid; place-items: center; font-size: 12px; font-weight: 600; background: #fff; color: var(--muted); }
-.voto .si { flex: 1.6; animation: presionar .3s ease var(--d, 0s) forwards; }
-@keyframes presionar { to { background: var(--green); border-color: var(--green); color: var(--navy); } }
+.voto .si { flex: 1.6; animation: presionar .3s ease var(--d, 0s) both; }
+@keyframes presionar { from { background: #fff; } to { background: var(--green); border-color: var(--green); color: var(--navy); } }
 
-/* Cuentas */
-.grilla { display: grid; grid-template-columns: 116px repeat(5, minmax(0, 1fr)); font-size: 12.5px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
-.grilla > div { padding: 9px 8px; border-bottom: 1px solid var(--line-2); min-height: 44px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
-.grilla .h { font-weight: 700; color: var(--muted); font-size: 11.5px; min-height: 34px; background: #fafbfe; }
-.grilla .cta b { display: block; font-size: 13px; }
-.grilla .cta span { font-size: 10.5px; color: var(--faint); letter-spacing: .06em; }
-.grilla .cta { display: block; }
-.pub { display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 6px; font-weight: 700; font-size: 11.5px; }
-.pub.a { background: #e3e6ff; color: #2a35c9; }
-.pub.b { background: #d6f8e8; color: #00704a; }
-.pub.c { background: #e9e0ff; color: #5a2fc0; }
-.pub.v { background: var(--navy); color: var(--green); }
-.resumen { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 12px; font-size: 13px; color: var(--muted); }
-.resumen b { color: var(--ink); font-size: 15px; }
+/* Cuentas: calendario con varios reels por cuenta */
+.resumen { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 12px; font-size: 13.5px; color: var(--muted); }
+.resumen b { color: var(--ink); font-size: 17px; font-weight: 700; }
+.cal { display: grid; grid-template-columns: 112px repeat(4, minmax(0, 1fr)); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.cal > div { padding: 10px; border-bottom: 1px solid var(--line-2); border-left: 1px solid var(--line-2); min-height: 112px; display: flex; gap: 6px; align-items: flex-start; flex-wrap: wrap; position: relative; }
+.cal > .cta, .cal > .h:first-child { border-left: 0; }
+.cal .h { min-height: 0; font-family: var(--mono); font-weight: 600; color: var(--muted); font-size: 12px; background: #fafbfe; padding-block: 9px; }
+.cal .cta { display: block; }
+.cal .cta b { display: block; font-size: 14px; }
+.cal .cta span { font-family: var(--mono); font-size: 10.5px; color: var(--faint); }
+.mini { width: 48px; aspect-ratio: 9 / 16; border-radius: 7px; background: var(--navy) center / cover; position: relative; overflow: hidden; box-shadow: 0 1px 3px rgba(22,22,63,.2); }
+.mini b { position: absolute; left: 3px; bottom: 3px; font-size: 10px; font-weight: 700; line-height: 1; padding: 3px 5px; border-radius: 4px; background: #fff; color: var(--ink); }
+.mini.a b { background: #e3e6ff; color: #2a35c9; }
+.mini.b b { background: #d6f8e8; color: #00704a; }
+.mini.c b { background: #e9e0ff; color: #5a2fc0; }
+.mini.v { outline: 2px solid var(--green); outline-offset: 1px; }
+.mini.v b { background: var(--navy); color: var(--green); }
+.cal .marca-viral { position: absolute; left: 8px; right: 8px; bottom: 8px; }
+.cal .marca-viral .chip { height: 22px; font-size: 11px; padding: 0 8px; }
 
 /* Pauta */
-.prop .q { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; }
+.prop .q { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3; }
 .prop .por { font-size: 13.5px; color: var(--muted); margin-top: 6px; }
 .acciones { display: flex; gap: 8px; margin-top: 14px; }
 .acciones .btn { height: 36px; font-size: 13.5px; }
-.acciones .ok { animation: presionarAzul .3s ease var(--d, 0s) forwards; }
-@keyframes presionarAzul { to { background: var(--blue); border-color: var(--blue); color: #fff; transform: scale(.97); } }
+.acciones .ok { animation: presionarAzul .3s ease var(--d, 0s) both; }
+@keyframes presionarAzul { from { background: #fff; } to { background: var(--blue); border-color: var(--blue); color: #fff; } }
 .reparto { display: grid; gap: 12px; }
 .fila { display: grid; grid-template-columns: 84px minmax(0, 1fr) 54px; gap: 10px; align-items: center; font-size: 13px; font-weight: 600; }
 .pista { height: 14px; background: var(--line-2); border-radius: 7px; overflow: hidden; }
-.pista i { display: block; height: 100%; border-radius: 7px; background: var(--blue-2); width: var(--a); animation: mover .9s cubic-bezier(.2,.8,.2,1) var(--d, 0s) forwards; }
+.pista i { display: block; height: 100%; border-radius: 7px; background: var(--blue-2); animation: mover .9s cubic-bezier(.2,.8,.2,1) var(--d, 0s) both; }
 .pista i.g { background: var(--green); }
 .pista i.x { background: #c9cbe0; }
-@keyframes mover { to { width: var(--b); } }
-.pct { position: relative; text-align: right; font-variant-numeric: tabular-nums; height: 1.4em; }
+@keyframes mover { from { width: var(--a); } to { width: var(--b); } }
+.pct { position: relative; text-align: right; font-family: var(--mono); height: 1.4em; }
 .pct span { position: absolute; right: 0; top: 0; }
-.pct .p1 { animation: sale .2s ease var(--d, 0s) forwards; }
-.pct .p2 { opacity: 0; animation: entra .2s ease var(--d, 0s) forwards; }
-@keyframes sale { to { opacity: 0; } }
-@keyframes entra { to { opacity: 1; } }
+.pct .p1 { animation: sale .2s ease var(--d, 0s) both; }
+.pct .p2 { opacity: 0; animation: entra .2s ease var(--d, 0s) both; }
 .topes { display: grid; gap: 8px; margin-top: 14px; }
 .topes div { display: flex; justify-content: space-between; gap: 8px; font-size: 12.5px; color: var(--muted); }
 
-/* Mensajes */
-.inbox { display: grid; gap: 8px; }
-.conv { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 10px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 13px; }
-.conv .av { width: 28px; height: 28px; font-size: 11.5px; }
+/* Mensajes: la bandeja corre rápido y después se abre un chat */
+.msj { position: absolute; inset: 20px 24px; }
+.contadores { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.contadores b { color: var(--ink); font-size: 17px; font-weight: 700; font-family: var(--mono); }
+.bandeja { position: absolute; top: 36px; left: 0; right: 0; bottom: 0; overflow: hidden; animation: sale .35s ease 4.1s both; -webkit-mask-image: linear-gradient(#000 85%, transparent); mask-image: linear-gradient(#000 85%, transparent); }
+.lista { display: grid; gap: 8px; animation: correr 3.6s cubic-bezier(.55,0,.45,1) .3s both; }
+@keyframes correr { from { transform: none; } to { transform: translateY(var(--y)); } }
+.conv { display: grid; grid-template-columns: 30px 20px minmax(0, 1fr) auto; gap: 10px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 0 12px; height: 54px; font-size: 13px; }
+.conv .av { width: 28px; height: 28px; font-size: 11px; }
+.conv svg { width: 18px; height: 18px; }
+.conv b { display: block; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .conv p { color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.conv.on { border-color: var(--sky); box-shadow: 0 0 0 3px rgba(89,112,255,.15); }
-.chat { display: flex; flex-direction: column; gap: 10px; }
-.bur { max-width: 86%; padding: 10px 13px; border-radius: 14px; font-size: 13.5px; line-height: 1.45; }
+.abierto { position: absolute; inset: 0; display: grid; grid-template-rows: auto minmax(0, 1fr); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); opacity: 0; animation: entra .4s ease 4.3s both; overflow: hidden; }
+.abierto .cab { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--line-2); }
+.abierto .cab b { display: block; font-size: 14px; }
+.abierto .cab span { font-size: 12px; color: var(--muted); }
+.abierto .cab svg { width: 20px; height: 20px; margin-left: auto; }
+.chat { display: flex; flex-direction: column; gap: 10px; padding: 14px; }
+.bur { max-width: 84%; padding: 10px 13px; border-radius: 14px; font-size: 13.5px; line-height: 1.45; }
 .bur.ellos { background: var(--line-2); align-self: flex-start; border-bottom-left-radius: 4px; }
 .bur.nos { background: var(--blue); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
-.escribe { align-self: flex-end; display: inline-flex; gap: 4px; padding: 12px 14px; background: #e3e6ff; border-radius: 14px; animation: aparece .3s var(--d) both, sale .2s var(--h) forwards; }
+.escribe { align-self: flex-end; display: inline-flex; gap: 4px; padding: 12px 14px; background: #e3e6ff; border-radius: 14px; animation: aparece .3s var(--d) both, sale .2s var(--h) both; }
 .escribe i { width: 6px; height: 6px; border-radius: 50%; background: var(--blue-2); animation: latido 1s infinite; }
 .escribe i:nth-child(2) { animation-delay: .2s; } .escribe i:nth-child(3) { animation-delay: .4s; }
-.verif { align-self: flex-end; }
+.chat .chip { align-self: flex-end; }
 
 /* Métricas */
-.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px; }
-.kpi .v { font-size: 24px; font-weight: 800; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
-.kpi .d { font-size: 12px; font-weight: 600; color: var(--green-ink); }
-.kpi .l { font-size: 12px; color: var(--muted); }
-.spark { width: 100%; height: 120px; display: block; }
-.spark .area { fill: rgba(56,66,243,.10); }
-.spark .lin { fill: none; stroke: var(--blue-2); stroke-width: 2.5; stroke-dasharray: 600; stroke-dashoffset: 600; animation: trazo 1.6s ease var(--d, 0s) forwards; }
-.spark .grid { stroke: var(--line-2); }
-.spark .pto { fill: var(--blue-2); }
-.spark text { font-size: 10px; fill: var(--faint); font-family: var(--f); }
-@keyframes trazo { to { stroke-dashoffset: 0; } }
-.manana { display: grid; gap: 8px; margin: 0; padding: 0; }
+.kpis { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px; }
+.kpi { padding: 12px 14px; }
+.kpi .v { font-size: 23px; font-weight: 700; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.kpi .d { font-family: var(--mono); font-size: 11.5px; font-weight: 600; color: var(--green-ink); }
+.kpi .l { font-size: 12px; color: var(--muted); line-height: 1.3; }
+.graf { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 14px; margin-bottom: 14px; }
+.chart { width: 100%; height: auto; display: block; overflow: visible; }
+.chart .grid { stroke: var(--line-2); }
+.chart .area { fill: rgba(56,66,243,.10); animation: entra .8s ease var(--d) both; opacity: 0; }
+.chart .lin { fill: none; stroke: var(--blue-2); stroke-width: 2.5; stroke-dasharray: 700; stroke-dashoffset: 700; animation: trazo 1.6s ease var(--d, 0s) both; }
+.chart .lin2 { fill: none; stroke: var(--green); stroke-width: 2.5; stroke-dasharray: 700; stroke-dashoffset: 700; animation: trazo 1.6s ease var(--d, 0s) both; }
+@keyframes trazo { from { stroke-dashoffset: 700; } to { stroke-dashoffset: 0; } }
+.chart text { font-size: 10px; fill: var(--faint); font-family: var(--mono); }
+.chart .pto { fill: var(--blue-2); }
+.ley { display: flex; gap: 14px; font-size: 12px; color: var(--muted); margin-top: 6px; }
+.ley i { display: inline-block; width: 12px; height: 3px; border-radius: 2px; vertical-align: 3px; margin-right: 6px; }
+.redes-b { display: grid; gap: 12px; }
+.redes-b .r { display: grid; grid-template-columns: 26px minmax(0, 1fr) 40px; gap: 10px; align-items: center; font-size: 13px; }
+.redes-b svg { width: 24px; height: 24px; }
+.redes-b .p { font-family: var(--mono); font-size: 12.5px; text-align: right; }
+.barra-h { height: 12px; background: var(--line-2); border-radius: 6px; overflow: hidden; }
+.barra-h i { display: block; height: 100%; border-radius: 6px; background: var(--blue-2); animation: mover 1s cubic-bezier(.2,.8,.2,1) var(--d, 0s) both; }
+.barras-v { display: flex; align-items: flex-end; gap: 10px; height: 130px; padding-top: 8px; }
+.barras-v div { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; min-width: 0; }
+.barras-v i { width: 100%; border-radius: 6px 6px 2px 2px; background: var(--sky); animation: crecer .9s cubic-bezier(.2,.8,.2,1) var(--d, 0s) both; transform-origin: bottom; }
+.barras-v i.top { background: var(--green); }
+.barras-v span { font-size: 10.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.barras-v em { font-style: normal; font-family: var(--mono); font-size: 11px; font-weight: 600; }
+@keyframes crecer { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.manana { display: grid; gap: 9px; margin: 0; padding: 0; }
 .manana li { list-style: none; display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 8px; font-size: 13.5px; }
-.manana li::before { content: attr(data-n); width: 22px; height: 22px; border-radius: 6px; background: var(--navy); color: var(--green); font-weight: 800; font-size: 12px; display: grid; place-items: center; }
+.manana li::before { content: attr(data-n); width: 22px; height: 22px; border-radius: 6px; background: var(--navy); color: var(--green); font-weight: 700; font-size: 12px; display: grid; place-items: center; }
 .manana .det { color: var(--muted); font-size: 12px; }
 
 /* La app en angosto (celular y reel) */
 @container (max-width: 720px) {
-  .app-in { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); height: auto; min-height: 640px; }
+  .app-in { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); height: auto; min-height: 660px; }
   .side { flex-direction: row; padding: 10px; gap: 4px; overflow: hidden; align-items: center; }
-  #navs { flex-direction: row; width: 100%; gap: 4px; }
   .side .marca, .side .pie { display: none; }
-  .nav { justify-content: center; padding: 0 6px; font-size: 12px; height: 36px; flex: 1; min-width: 0; }
+  #navs { flex-direction: row; width: 100%; gap: 4px; }
+  .nav { justify-content: center; padding: 0 6px; font-size: 12.5px; height: 38px; flex: 1; min-width: 0; }
   .nav span { display: none; }
   .nav.on span { display: inline; }
-  .nav.on { flex: 2.2; }
+  .nav.on { flex: 2.3; }
   .nav.on::before { left: 8px; right: 8px; top: auto; bottom: -10px; width: auto; height: 3px; border-radius: 3px 3px 0 0; }
-  .tbar { padding: 12px 14px; }
-  .tbar h2 { font-size: 18px; }
-  .vivo { font-size: 11px; padding: 4px 9px; }
-  .pane { padding: 12px 14px; height: 560px; flex: none; }
-  .cuadro .pane { height: auto; flex: 1; }
-  .dos { grid-template-columns: minmax(0, 1fr); height: auto; }
-  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .grilla { grid-template-columns: 92px repeat(3, minmax(0, 1fr)); }
-  .grilla .x4, .grilla .x5 { display: none; }
-  .ocultar-angosto { display: none !important; }
+  .tbar { padding: 16px 16px 14px; }
+  .tbar h2 { font-size: 26px; }
+  .pane { padding: 12px 14px; height: 600px; flex: none; }
+  .msj { inset: 12px 14px; }
+  .dos, .graf { grid-template-columns: minmax(0, 1fr); }
+  .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .kpi { padding: 10px; }
+  .kpi .v { font-size: 19px; }
+  .cal { grid-template-columns: 84px repeat(3, minmax(0, 1fr)); }
+  .cal .x4 { display: none; }
+  .cal > div { padding: 8px 6px; gap: 4px; min-height: 104px; }
+  .mini { width: calc(50% - 2px); }
+  .cal .cta b { font-size: 13px; }
 }
 
 /* controles debajo de la demo */
@@ -233,20 +263,19 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* ---------- Secciones ---------- */
 .sec { padding-block: 80px; }
 .sec + .sec { border-top: 1px solid var(--line); }
-.sec h2 { font-size: clamp(30px, 4vw, 46px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 800; text-wrap: balance; max-width: 22ch; }
+.sec .kicker { color: var(--blue-2); }
+.sec h2 { font-size: clamp(30px, 4vw, 46px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance; max-width: 22ch; margin-top: 12px; }
 .sec .lead { font-size: 18px; color: var(--muted); max-width: 60ch; margin-top: 14px; }
 .flujo { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 28px; margin-top: 48px; counter-reset: f; }
 .flujo div { counter-increment: f; }
-.flujo div::before { content: counter(f, decimal-leading-zero); display: block; font-size: 15px; font-weight: 800; color: var(--blue-2); margin-bottom: 14px; }
+.flujo div::before { content: counter(f, decimal-leading-zero); display: block; font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--blue-2); margin-bottom: 14px; }
 .flujo h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
 .flujo p { font-size: 15px; color: var(--muted); }
 .flujo button { margin-top: 12px; border: 0; background: transparent; padding: 0; color: var(--blue-2); font-weight: 600; font-size: 14px; }
 .flujo button:hover { text-decoration: underline; }
-
 .cifras { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; margin-top: 44px; }
-.cifras .n { font-size: clamp(44px, 6vw, 72px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; color: var(--blue); }
+.cifras .n { font-size: clamp(44px, 6vw, 72px); font-weight: 700; letter-spacing: -0.05em; line-height: 1; color: var(--blue); }
 .cifras p { font-size: 15px; color: var(--muted); margin-top: 8px; }
-
 .modos { margin-top: 40px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 40px; align-items: center; }
 .seg { display: inline-flex; background: var(--line-2); border-radius: 12px; padding: 4px; gap: 2px; flex-wrap: wrap; }
 .seg button { border: 0; background: transparent; height: 40px; padding: 0 18px; border-radius: 9px; font-weight: 600; font-size: 14.5px; color: var(--muted); }
@@ -254,83 +283,93 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .modo-txt { margin-top: 18px; min-height: 5.5em; }
 .modo-txt b { display: block; font-size: 20px; letter-spacing: -0.02em; }
 .modo-txt p { color: var(--muted); margin-top: 6px; }
-
 .reglas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 40px; margin-top: 44px; }
 .reglas h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
 .reglas p { font-size: 15px; color: var(--muted); }
-
 .cierre { background: var(--navy); color: #fff; }
 .cierre .wrap { padding-block: 80px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 32px 56px; align-items: end; }
-.cierre h2 { font-size: clamp(30px, 4vw, 46px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 800; text-wrap: balance; }
+.cierre h2 { font-size: clamp(30px, 4vw, 46px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance; }
 .cierre p { color: var(--side-ink); font-size: 17px; margin-top: 14px; }
 .cierre .ctas { display: flex; flex-wrap: wrap; gap: 10px; }
 .legal { background: var(--navy); color: var(--side-muted); font-size: 13px; }
 .legal .wrap { padding-block: 0 32px; }
 
-/* ---------- Modo reel (9:16, para grabar la pantalla) ---------- */
+/* ---------- Modo reel (9:16) ---------- */
 .reel { position: fixed; inset: 0; z-index: 100; background: #0b0b26; display: grid; place-items: center; }
 .reel[hidden] { display: none !important; }
 .cuadro { position: relative; height: min(100vh, 100dvh, calc(100vw * 16 / 9)); aspect-ratio: 9 / 16; max-width: 100%; background: var(--navy); color: #fff; overflow: hidden; display: flex; flex-direction: column; container-type: size; }
-.cuadro .cap { padding: 7cqh 7cqw 3cqh; min-height: 24cqh; display: flex; flex-direction: column; justify-content: flex-end; gap: 1.4cqh; }
-.cuadro .cap .k { font-size: 2.6cqw; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--green); }
-.cuadro .cap h3 { font-size: 7.4cqw; line-height: 1.04; letter-spacing: -0.035em; font-weight: 800; text-wrap: balance; }
-.cuadro .cap h3 em { font-style: normal; color: var(--green); }
-.cuadro .cap.cambia { animation: aparece .5s cubic-bezier(.2,.8,.2,1) both; }
-.cuadro .lienzo { flex: 1; min-height: 0; padding: 0 4.5cqw; position: relative; }
+.cuadro .cap { padding: 6cqh 6.5cqw 2.6cqh; }
+.cuadro .cap h3 { font-size: 6.8cqw; line-height: 1.06; letter-spacing: -0.04em; font-weight: 700; text-wrap: balance; animation: aparece .5s cubic-bezier(.2,.8,.2,1) both; }
+.cuadro .lienzo { flex: 1; min-height: 0; padding: 0 3.5cqw 3.5cqw; }
 .cuadro .lienzo .ventana { border-radius: 3cqw; height: 100%; display: flex; flex-direction: column; }
 .cuadro .lienzo .ventana .barra-v { display: none; }
 .cuadro .lienzo .app { flex: 1; min-height: 0; zoom: var(--z, 1); }
 .cuadro .lienzo .app-in { height: 100%; min-height: 0; }
-.cuadro .pie-r { display: flex; align-items: center; justify-content: space-between; padding: 3cqh 7cqw 4cqh; font-size: 2.8cqw; color: var(--side-ink); }
-.cuadro .pie-r .marca { font-size: 3.6cqw; }
-.cuadro .pie-r .marca svg { width: 5cqw; height: 5cqw; }
-.portada-r { position: absolute; inset: 0; background: var(--navy); display: flex; flex-direction: column; justify-content: center; gap: 3cqh; padding: 9cqw; z-index: 3; }
-.portada-r[hidden] { display: none; }
-.portada-r .marca { font-size: 5cqw; }
-.portada-r .marca svg { width: 8cqw; height: 8cqw; }
-.portada-r h3 { font-size: 10cqw; line-height: 1; letter-spacing: -0.045em; font-weight: 800; text-wrap: balance; animation: aparece .6s .2s both; }
-.portada-r h3 em { font-style: normal; color: var(--green); }
-.portada-r p { font-size: 4.2cqw; color: var(--side-ink); animation: aparece .6s .6s both; }
-.portada-r .url-r { font-size: 4.6cqw; font-weight: 800; color: var(--green); animation: aparece .6s .9s both; }
-.portada-r .redes span { font-size: 3cqw; }
-.salir { position: fixed; top: max(14px, env(safe-area-inset-top, 0px)); right: max(14px, env(safe-area-inset-right, 0px)); z-index: 101; display: flex; gap: 8px; transition: opacity .4s; }
-.salir[hidden] { display: none; }
-.salir.quieto { opacity: 0; pointer-events: none; }
-.salir button { height: 36px; padding: 0 14px; border-radius: 9px; border: 1px solid rgba(255,255,255,.25); background: rgba(22,22,63,.85); color: #fff; font-weight: 600; font-size: 13.5px; }
+.cuadro .lienzo .pane { height: auto; flex: 1; }
+.tapa { position: absolute; inset: 0; background: var(--navy); display: flex; flex-direction: column; justify-content: center; gap: 3.2cqh; padding: 9cqw; z-index: 3; }
+.tapa[hidden] { display: none; }
+.tapa .marca { font-size: 5.4cqw; gap: 2.4cqw; animation: aparece .6s both; }
+.tapa .marca svg { width: 9cqw; height: 9cqw; }
+.tapa h3 { font-size: 10cqw; line-height: 1; letter-spacing: -0.05em; font-weight: 700; text-wrap: balance; animation: aparece .6s .2s both; }
+.tapa p { font-size: 4.3cqw; color: var(--side-ink); animation: aparece .6s .6s both; }
+.tapa.fin { justify-content: center; align-items: center; text-align: center; gap: 4cqh; }
+.tapa.fin .marca { flex-direction: column; font-size: 9cqw; gap: 3cqw; }
+.tapa.fin .marca svg { width: 26cqw; height: 26cqw; }
+.tapa .apps-r { display: flex; gap: 4.5cqw; justify-content: center; }
+.tapa .apps-r svg { width: 12cqw; height: 12cqw; }
+.tapa .apps-r span { animation: pop .4s cubic-bezier(.2,1.4,.4,1) var(--d) both; }
+
+.controles { position: fixed; left: 50%; transform: translateX(-50%); bottom: max(14px, env(safe-area-inset-bottom, 0px)); z-index: 101; width: min(560px, calc(100vw - 24px)); display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 14px; background: rgba(22,22,63,.92); border: 1px solid rgba(255,255,255,.14); color: #fff; transition: opacity .4s; box-shadow: 0 12px 40px rgba(0,0,0,.4); }
+.controles[hidden] { display: none; }
+.controles.quieto { opacity: 0; pointer-events: none; }
+.controles button, .controles a { height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,.22); background: transparent; color: #fff; font-weight: 600; font-size: 13px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.controles .pp { width: 40px; padding: 0; justify-content: center; background: var(--green); border-color: var(--green); color: var(--navy); }
+.controles .linea { display: grid; gap: 4px; min-width: 0; }
+.controles input[type=range] { width: 100%; accent-color: var(--green); margin: 0; }
+.controles .tiempo { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; color: var(--side-muted); }
+.controles .der { display: flex; gap: 6px; }
+.controles .fila2 { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.controles .fila2 button { height: 28px; font-size: 12px; padding: 0 10px; color: var(--side-ink); }
+.controles .fila2 button.on { color: var(--navy); background: #fff; border-color: #fff; }
 
 @media (max-width: 900px) {
   .hero .txt, .modos, .cierre .wrap { grid-template-columns: minmax(0, 1fr); }
   .flujo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cifras { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .reglas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .hero { background: linear-gradient(var(--navy) 0 48%, var(--bg) 48%); }
+  .hero { background: linear-gradient(var(--navy) 0 46%, var(--bg) 46%); }
 }
 @media (max-width: 600px) {
   .flujo, .reglas { grid-template-columns: minmax(0, 1fr); }
   .sec { padding-block: 56px; }
-  .barra-v .url { display: none; }
   .top .btn { display: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01s !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition: none !important; }
+  .controles { grid-template-columns: auto minmax(0, 1fr); }
+  .controles .der { grid-column: 1 / -1; justify-content: center; }
 }
 </style>
 </head>
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g-ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#feda75"/><stop offset=".35" stop-color="#fa7e1e"/><stop offset=".6" stop-color="#d62976"/><stop offset="1" stop-color="#4f5bd5"/></linearGradient>
+  </defs>
   <symbol id="logo" viewBox="0 0 32 32">
     <rect x="2" y="9" width="12" height="20" rx="3.5" fill="#5970ff"/>
     <rect x="10" y="5" width="12" height="20" rx="3.5" fill="#3842f3" stroke="#16163f" stroke-width="1.5"/>
     <rect x="18" y="1" width="12" height="20" rx="3.5" fill="#00e281" stroke="#16163f" stroke-width="1.5"/>
     <path d="M22.5 8.2v5.6l4.6-2.8z" fill="#16163f"/>
   </symbol>
+  <symbol id="i-yt" viewBox="0 0 24 24"><rect x="1" y="4.5" width="22" height="15" rx="4.5" fill="#ff0033"/><path d="M10 8.6v6.8l5.8-3.4z" fill="#fff"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="1.5" y="1.5" width="21" height="21" rx="6" fill="url(#g-ig)"/><rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="2.9" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="16.6" cy="7.4" r="1.1" fill="#fff"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#1877f2"/><path d="M13.4 22.9v-7.6h2.5l.4-3h-2.9v-1.9c0-.9.3-1.5 1.5-1.5h1.6V6.2c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.5v7.4z" fill="#fff"/></symbol>
+  <symbol id="i-tt" viewBox="0 0 24 24"><rect x="1.5" y="1.5" width="21" height="21" rx="6" fill="#111"/><path d="M15.2 5.2c.4 1.7 1.6 2.9 3.3 3.1v2.4c-1.2 0-2.3-.4-3.3-1v4.6a4.3 4.3 0 1 1-4.3-4.3v2.5a1.8 1.8 0 1 0 1.8 1.8V5.2z" fill="#25f4ee" transform="translate(-.6 -.4)"/><path d="M15.2 5.2c.4 1.7 1.6 2.9 3.3 3.1v2.4c-1.2 0-2.3-.4-3.3-1v4.6a4.3 4.3 0 1 1-4.3-4.3v2.5a1.8 1.8 0 1 0 1.8 1.8V5.2z" fill="#fe2c55" transform="translate(.6 .4)"/><path d="M15.2 5.2c.4 1.7 1.6 2.9 3.3 3.1v2.4c-1.2 0-2.3-.4-3.3-1v4.6a4.3 4.3 0 1 1-4.3-4.3v2.5a1.8 1.8 0 1 0 1.8 1.8V5.2z" fill="#fff"/></symbol>
 </svg>
 
 <header class="top">
   <div class="wrap">
-    <a class="marca" href="#"><svg width="28" height="28"><use href="#logo"/></svg>Multicuenta</a>
-    <button class="btn line sm" type="button" data-reel>Ver en modo reel</button>
+    <span class="marca"><svg width="28" height="28"><use href="#logo"/></svg>Multicuenta</span>
+    <button class="btn line sm" type="button" data-reel>Ver en 9:16</button>
   </div>
 </header>
 
@@ -339,7 +378,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
     <div class="txt">
       <div>
         <div class="kicker">Administración automática de contenido multicuenta</div>
-        <h1>Se graba una vez. <em>Se publica en todo el ecosistema.</em></h1>
+        <h1>Se graba una vez. Se publica en todo el ecosistema.</h1>
       </div>
       <div>
         <p class="sub">Un equipo acompaña al candidato y una plataforma de agentes de IA edita, publica, pauta y mide en cuatro redes, todos los días. Mirá cómo trabaja.</p>
@@ -347,13 +386,15 @@ button { font: inherit; color: inherit; cursor: pointer; }
           <button class="btn green" type="button" data-reel>Ver la demo en 9:16</button>
           <a class="btn line" href="#como">Cómo funciona</a>
         </div>
-        <div class="redes"><span>YouTube</span><span>Instagram</span><span>Facebook</span><span>TikTok</span></div>
+        <div class="apps" aria-label="YouTube, Instagram, Facebook y TikTok">
+          <svg><use href="#i-yt"/></svg><svg><use href="#i-ig"/></svg><svg><use href="#i-fb"/></svg><svg><use href="#i-tt"/></svg>
+        </div>
       </div>
     </div>
 
     <div id="demo">
       <div class="ventana" id="ventana">
-        <div class="barra-v"><i></i><i></i><i></i><span class="url">multicuenta.punchi.dev/panel</span></div>
+        <div class="barra-v"><i></i><i></i><i></i></div>
         <div class="app" id="app">
           <div class="app-in">
             <aside class="side">
@@ -362,7 +403,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
               <div class="pie"><span class="av">EC</span><span><b>Equipo de campaña</b>Con permiso</span></div>
             </aside>
             <div class="main">
-              <div class="tbar"><div><h2 id="tt">Contenido</h2><p id="tl"></p></div><span class="vivo" id="vivo">Agentes trabajando</span></div>
+              <div class="tbar"><h2 id="tt">Contenido</h2><p id="tl"></p></div>
               <div class="prog"><i id="prog"></i></div>
               <div class="pane" id="pane"></div>
             </div>
@@ -380,23 +421,23 @@ button { font: inherit; color: inherit; cursor: pointer; }
 <main>
   <section class="sec" id="como">
     <div class="wrap">
-      <div class="kicker" style="color:var(--blue-2)">Cómo funciona</div>
-      <h2 style="margin-top:12px">Un ciclo que se repite todos los días</h2>
+      <div class="kicker">Cómo funciona</div>
+      <h2>Un ciclo que se repite todos los días</h2>
       <p class="lead">Lo que se mide a la noche es la lista de qué grabar a la mañana siguiente. Cada vuelta deja aprendizajes que mejoran la edición y la pauta.</p>
       <div class="flujo">
         <div><h3>Grabar</h3><p>Una persona del equipo sigue al candidato con la lista de qué conviene capturar hoy: temas, tomas, duración y tono.</p><button type="button" data-ir="0">Ver en la demo →</button></div>
         <div><h3>Editar</h3><p>Cada toma sale en tres versiones con distinto gancho, estilo y sonido. Pasan un control técnico, un crítico visual y la aprobación del equipo.</p><button type="button" data-ir="0">Ver en la demo →</button></div>
-        <div><h3>Publicar</h3><p>Cada cuenta del ecosistema recibe su versión, en su horario. Lo que se viraliza vuelve a la cuenta del candidato.</p><button type="button" data-ir="1">Ver en la demo →</button></div>
+        <div><h3>Publicar</h3><p>Cada cuenta del ecosistema recibe varias versiones por día, cada una en su horario. Lo que se viraliza vuelve a la cuenta del candidato.</p><button type="button" data-ir="1">Ver en la demo →</button></div>
         <div><h3>Pautar</h3><p>Prueba chica en cada versión y más inversión a lo que rinde. El agente propone, el responsable aprueba.</p><button type="button" data-ir="2">Ver en la demo →</button></div>
-        <div><h3>Medir</h3><p>Retención, vistos completos y compartidos se convierten en indicaciones concretas para grabar.</p><button type="button" data-ir="4">Ver en la demo →</button></div>
+        <div><h3>Medir</h3><p>Retención, vistos completos y compartidos por red y por cuenta se convierten en indicaciones concretas para grabar.</p><button type="button" data-ir="4">Ver en la demo →</button></div>
       </div>
     </div>
   </section>
 
   <section class="sec">
     <div class="wrap">
-      <div class="kicker" style="color:var(--blue-2)">El volumen</div>
-      <h2 style="margin-top:12px">Más presencia, sin grabar más</h2>
+      <div class="kicker">El volumen</div>
+      <h2>Más presencia, sin grabar más</h2>
       <div class="cifras">
         <div><div class="n">1 → 3</div><p>Cada toma cruda sale en tres versiones distintas, adaptadas a cada red.</p></div>
         <div><div class="n">3</div><p>Videos por día en cada cuenta del ecosistema.</p></div>
@@ -408,8 +449,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
   <section class="sec">
     <div class="wrap">
-      <div class="kicker" style="color:var(--blue-2)">Quién decide</div>
-      <h2 style="margin-top:12px">La campaña elige cuánta libertad le da</h2>
+      <div class="kicker">Quién decide</div>
+      <h2>La campaña elige cuánta libertad le da</h2>
       <div class="modos">
         <div>
           <div class="seg" role="group" aria-label="Modo de la plataforma" id="seg">
@@ -419,17 +460,15 @@ button { font: inherit; color: inherit; cursor: pointer; }
           </div>
           <div class="modo-txt" id="modoTxt" aria-live="polite"></div>
         </div>
-        <div>
-          <p class="lead" style="margin-top:0">En cualquier modo hay controles que no se apagan: topes de gasto diarios y totales por red y por cuenta, alertas ante gastos fuera de lo normal, registro de cada cambio con su motivo y aviso de «pagado por» en cada anuncio político.</p>
-        </div>
+        <p class="lead" style="margin-top:0">En cualquier modo hay controles que no se apagan: topes de gasto diarios y totales por red y por cuenta, alertas ante gastos fuera de lo normal, registro de cada cambio con su motivo y aviso de «pagado por» en cada anuncio político.</p>
       </div>
     </div>
   </section>
 
   <section class="sec">
     <div class="wrap">
-      <div class="kicker" style="color:var(--blue-2)">Cumplimiento</div>
-      <h2 style="margin-top:12px">Las reglas se controlan antes de publicar</h2>
+      <div class="kicker">Cumplimiento</div>
+      <h2>Las reglas se controlan antes de publicar</h2>
       <div class="reglas">
         <div><h3>Propaganda política</h3><p>Meta y Google exigen verificar al anunciante y mostrar quién paga. TikTok no acepta pauta política: ahí el crecimiento es orgánico.</p></div>
         <div><h3>Calendario electoral</h3><p>Inicio de campaña, límites para la publicidad y veda bloquean lo que no corresponde. Se validan con el asesor legal.</p></div>
@@ -450,100 +489,115 @@ button { font: inherit; color: inherit; cursor: pointer; }
     </div>
     <div class="ctas">
       <button class="btn green" type="button" data-reel>Ver la demo en 9:16</button>
-      <button class="btn line" type="button" data-ir="0">Volver a la demo</button>
+      <a class="btn line" href="multicuenta-reel.mp4" download>Descargar el video</a>
     </div>
   </div>
 </section>
-<footer class="legal"><div class="wrap">Demo con datos de ejemplo. Noviembre de 2026.</div></footer>
+<footer class="legal"><div class="wrap">Demo con datos de ejemplo. Fotos de dominio público. Noviembre de 2026.</div></footer>
 
 <div class="reel" id="reel" hidden>
   <div class="cuadro" id="cuadro">
-    <div class="cap" id="cap"><div class="k" id="capK"></div><h3 id="capH"></h3></div>
+    <div class="cap" id="cap"><h3 id="capH"></h3></div>
     <div class="lienzo" id="lienzo"></div>
-    <div class="pie-r"><span class="marca"><svg><use href="#logo"/></svg>Multicuenta</span><span>multicuenta.punchi.dev</span></div>
-    <div class="portada-r" id="portadaR" hidden></div>
+    <div class="tapa" id="tapa" hidden></div>
   </div>
 </div>
-<div class="salir" id="salir" hidden><button type="button" id="reiniciar">Empezar de nuevo</button><button type="button" id="cerrarReel">Salir</button></div>
+<div class="controles" id="controles" hidden>
+  <button class="pp" type="button" id="pp" aria-label="Pausar">❚❚</button>
+  <div class="linea">
+    <input type="range" id="barra" min="0" max="1000" step="1" value="0" aria-label="Posición del video">
+    <div class="tiempo"><span id="tAct">0:00</span><span id="tTot">0:00</span></div>
+  </div>
+  <div class="der">
+    <a href="multicuenta-reel.mp4" download>Descargar</a>
+    <button type="button" id="cerrarReel">Salir</button>
+  </div>
+  <div class="fila2" id="saltos"></div>
+</div>
 
 <script>
 (() => {
   const $ = id => document.getElementById(id);
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const params = new URLSearchParams(location.search);
+  const RENDER = params.has('render');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches && !RENDER;
   const ic = {
     contenido: 'M4 5h16v14H4zM10 9l5 3-5 3z',
-    cuentas: 'M7 4h10v16H7zM3 7v10M21 7v10',
+    cuentas: 'M4 5h16v15H4zM4 10h16M9 3v4M15 3v4',
     pauta: 'M4 19V9M10 19V5M16 19v-7M22 19H2',
     mensajes: 'M4 5h16v11H9l-5 4z',
     metricas: 'M3 17l6-6 4 4 8-8M15 7h6v6',
   };
+  const foto = n => `img/r${n}.webp`;
+  const red = k => `<svg aria-hidden="true"><use href="#i-${k}"/></svg>`;
 
   const scenes = [
     {
       nav: 'Contenido', icon: 'contenido', dur: 10,
       t: 'Contenido', l: 'Pedido de hoy · Recorrida por Barrio Norte',
-      cap: ['Edición', 'Una toma cruda, <em>tres versiones</em> listas'],
+      cap: 'Una toma cruda, tres versiones listas',
       html: () => `
       <div class="dos">
         <div class="card">
           <div class="card-h"><b>Lo que está haciendo el agente</b><span class="chip azul">En curso</span></div>
           <ul class="log">
             <li class="in" style="--d:.2s"><span class="ic">✓</span><div>Recibió la toma cruda<div class="det">4 min 12 s · recorrida, charla con vecinos</div></div></li>
-            <li class="in" style="--d:1s"><span class="ic">✓</span><div>Transcribió y marcó 6 momentos<div class="det">2 frases fuertes, 1 pregunta de una vecina</div></div></li>
-            <li class="in" style="--d:1.8s"><span class="ic">✓</span><div>Eligió tres ganchos distintos<div class="det">frase de vecino · lista rápida · plano del lugar</div></div></li>
-            <li class="in" style="--d:2.6s"><span class="ic run">▶</span><div>Renderizando las tres versiones<div class="barrita"><i style="--d:2.8s;--t:2.4s"></i></div></div></li>
-            <li class="in" style="--d:5.4s"><span class="ic">✓</span><div>Control técnico y crítico visual<div class="det">sin pantallas vacías ni textos ilegibles</div></div></li>
+            <li class="in" style="--d:.9s"><span class="ic">✓</span><div>Transcribió y marcó 6 momentos<div class="det">2 frases fuertes, 1 pregunta de una vecina</div></div></li>
+            <li class="in" style="--d:1.6s"><span class="ic">✓</span><div>Eligió tres ganchos distintos<div class="det">frase de vecino · lista rápida · plano del lugar</div></div></li>
+            <li class="in" style="--d:2.3s"><span class="ic run">▶</span><div>Renderizando las tres versiones<div class="barrita"><i style="--d:2.5s;--t:2.4s"></i></div></div></li>
+            <li class="in" style="--d:5.1s"><span class="ic">✓</span><div>Control técnico y crítico visual<div class="det">sin pantallas vacías ni textos ilegibles</div></div></li>
           </ul>
         </div>
         <div class="card">
           <div class="card-h"><b>Versiones para aprobar</b><span class="small">3 de 3</span></div>
           <div class="tels">
-            ${[['a','REELS','«Esto me lo dijeron hoy en la puerta de una escuela»','38 s · subtítulos grandes','8,6'],
-               ['b','TIKTOK','Tres cosas que vimos en diez cuadras','24 s · sonido en tendencia','8,2'],
-               ['c','SHORTS','La recorrida completa, sin cortes de más','55 s · narración','7,9']]
-              .map(([k, red, g, s, pt], i) => `
-              <div class="in" style="--d:${3.2 + i * .5}s">
-                <div class="tel ${k}"><span class="red">${red} · 9:16</span><span class="g">${g}</span><div><span class="s">${s}</span><div class="play"><i style="--d:${3.4 + i * .5}s"></i></div></div></div>
-                <div class="nota"><span class="chip verde pop" style="--d:${5.8 + i * .2}s">Pasó</span><span class="pt in" style="--d:${5.8 + i * .2}s">${pt}/10</span></div>
-                <div class="voto"><span class="si" style="--d:${7.2 + i * .45}s">Me gusta</span><span>No</span></div>
+            ${[[1, 'REELS', '«Esto me lo dijeron hoy en la puerta de una escuela»', '38 s · subtítulos grandes', '8,6'],
+               [2, 'TIKTOK', 'Tres cosas que vimos en diez cuadras', '24 s · sonido en tendencia', '8,2'],
+               [4, 'SHORTS', 'La recorrida completa, sin cortes de más', '55 s · narración', '7,9']]
+              .map(([f, rd, g, s, pt], i) => `
+              <div class="in" style="--d:${3.0 + i * .45}s">
+                <div class="tel" style="background-image:url(${foto(f)})"><span class="red">${rd} · 9:16</span><span class="g">${g}</span><div><span class="s">${s}</span><div class="play"><i style="--d:${3.2 + i * .45}s"></i></div></div></div>
+                <div class="nota"><span class="chip verde pop" style="--d:${5.6 + i * .2}s">Pasó</span><span class="pt in" style="--d:${5.6 + i * .2}s">${pt}/10</span></div>
+                <div class="voto"><span class="si" style="--d:${7 + i * .45}s">Me gusta</span><span>No</span></div>
               </div>`).join('')}
           </div>
         </div>
       </div>`
     },
     {
-      nav: 'Cuentas', icon: 'cuentas', dur: 10,
-      t: 'Cuentas', l: 'Ecosistema del candidato · hoy',
-      cap: ['Distribución', 'Cada cuenta, <em>su versión y su horario</em>'],
+      nav: 'Cuentas', icon: 'cuentas', dur: 11,
+      t: 'Cuentas', l: 'Calendario del ecosistema · hoy',
+      cap: 'Cada cuenta, varias versiones por día',
       html: () => {
         const filas = [['Oficial', 'YT IG FB TT'], ['Clips', 'IG TT YT'], ['Propuestas', 'IG FB YT'], ['Recorridas', 'IG TT FB'], ['Equipo', 'IG TT'], ['Distrito', 'FB IG']];
-        const horas = ['9:00', '12:00', '15:00', '18:00', '21:00'];
+        const horas = ['9:00', '13:00', '17:00', '21:00'];
+        // [cuenta][hora] = lista de [versión, foto]
         const plan = [
-          [null, null, null, null, null],
-          ['A', null, 'B', null, 'C'],
-          [null, 'C', null, 'A', null],
-          ['B', null, 'A', null, null],
-          [null, 'A', null, 'C', null],
-          ['C', null, null, 'B', null],
+          [[['B', 1]], [], [['C', 5]], [['A', 9]]],
+          [[['A', 2], ['C', 3]], [['B', 6]], [['A', 7], ['B', 11]], [['C', 12]]],
+          [[], [['C', 4], ['A', 8]], [['B', 10]], [['A', 1]]],
+          [[['B', 5], ['A', 12]], [['C', 9]], [['A', 3]], [['B', 2], ['C', 6]]],
+          [[['C', 7]], [['A', 11], ['B', 4]], [], [['C', 8]]],
+          [[['A', 10]], [['B', 3]], [['C', 2], ['A', 5]], []],
         ];
-        let n = 0, html = `<div class="grilla"><div class="h">Cuenta</div>${horas.map((h, i) => `<div class="h x${i + 1}">${h}</div>`).join('')}`;
-        filas.forEach(([nm, redes], r) => {
-          html += `<div class="cta"><b>${nm}</b><span>${redes}</span></div>`;
-          plan[r].forEach((v, c) => {
-            let cel = '';
-            if (v) cel = `<span class="pub ${v.toLowerCase()} pop" style="--d:${.4 + (n++) * .32}s">${v}</span>`;
-            if (r === 1 && c === 0) cel += `<span class="chip verde pop" style="--d:5.8s">Se viraliza</span>`;
-            if (r === 0 && c === 2) cel = `<span class="pub v pop" style="--d:7s">Resube A</span>`;
+        let n = 0;
+        let html = `<div class="cal"><div class="h">Cuenta</div>${horas.map((h, i) => `<div class="h x${i + 1}">${h}</div>`).join('')}`;
+        filas.forEach(([nm, rs], r) => {
+          html += `<div class="cta"><b>${nm}</b><span>${rs}</span></div>`;
+          plan[r].forEach((lista, c) => {
+            let cel = lista.map(([v, f]) => `<span class="mini ${v.toLowerCase()} pop" style="--d:${.3 + (n++) * .14}s;background-image:url(${foto(f)})"><b>${v}</b></span>`).join('');
+            if (r === 0 && c === 1) cel = `<span class="mini v pop" style="--d:6.6s;background-image:url(${foto(2)})"><b>Resube</b></span>`;
+            if (r === 1 && c === 0) cel += `<span class="marca-viral"><span class="chip verde pop" style="--d:5.6s">Se viraliza</span></span>`;
             html += `<div class="x${c + 1}">${cel}</div>`;
           });
         });
-        return `<div class="resumen in" style="--d:.1s"><span><b>12</b> publicaciones hoy</span><span><b>6</b> cuentas</span><span class="ocultar-angosto"><b>0</b> choques de horario</span></div>${html}</div>`;
+        return `<div class="resumen in" style="--d:.1s"><span><b>28</b> publicaciones hoy</span><span><b>6</b> cuentas</span><span><b>4</b> redes</span><span><b>0</b> choques de horario</span></div>${html}</div>`;
       }
     },
     {
       nav: 'Pauta', icon: 'pauta', dur: 9,
       t: 'Pauta', l: 'Modo con permiso · pieza «Recorrida Barrio Norte»',
-      cap: ['Pauta', 'La inversión va <em>a lo que rinde</em>'],
+      cap: 'La inversión va a lo que rinde',
       html: () => `
       <div class="dos">
         <div class="card prop in" style="--d:.2s">
@@ -569,118 +623,183 @@ button { font: inherit; color: inherit; cursor: pointer; }
       </div>`
     },
     {
-      nav: 'Mensajes', icon: 'mensajes', dur: 9,
-      t: 'Mensajes', l: 'Comentarios y privados de todas las cuentas',
-      cap: ['Conversación', 'Responde con <em>información aprobada</em>'],
-      html: () => `
-      <div class="dos">
-        <div class="inbox">
-          <div class="conv on in" style="--d:.1s"><span class="av">MR</span><div><b>Marta R.</b><p>¿Cuándo viene al barrio?</p></div><span class="chip azul">Respondido</span></div>
-          <div class="conv in" style="--d:.3s"><span class="av" style="background:#8a5300">JP</span><div><b>Comentario en Clips</b><p>Insulto y spam</p></div><span class="chip gris pop" style="--d:5.6s">Oculto</span></div>
-          <div class="conv in" style="--d:.5s"><span class="av" style="background:#00a862">LS</span><div><b>Lucas S.</b><p>Quiero sumarme como voluntario</p></div><span class="chip violeta pop" style="--d:6.4s">Al equipo</span></div>
-          <div class="conv in ocultar-angosto" style="--d:.7s"><span class="av" style="background:#5a2fc0">AG</span><div><b>Ana G.</b><p>¿Qué proponen para el transporte?</p></div><span class="chip azul pop" style="--d:7.2s">Respondido</span></div>
-        </div>
-        <div class="card chat">
-          <div class="bur ellos in" style="--d:.6s">Hola, ¿cuándo viene al barrio? Queremos preguntarle por la plaza.</div>
-          <div class="escribe" style="--d:1.4s;--h:3s"><i></i><i></i><i></i></div>
-          <div class="bur nos in" style="--d:3.1s">¡Hola Marta! El sábado a las 11 está en la plaza Belgrano. Va a haber un momento para preguntas, así que llevá la tuya.</div>
-          <span class="chip verde verif pop" style="--d:3.9s">Verificado: dato aprobado por la campaña</span>
-        </div>
-      </div>`
+      nav: 'Mensajes', icon: 'mensajes', dur: 11, noScroll: true,
+      t: 'Mensajes', l: 'Comentarios y privados de las 6 cuentas',
+      cap: 'Cientos de mensajes, respondidos al momento',
+      html: () => {
+        const gente = [['Marta R.', '¿Cuándo viene al barrio?', 'ig', 'azul', 'Respondido'], ['Comentario en Clips', 'Insulto', 'tt', 'gris', 'Oculto'], ['Lucas S.', 'Quiero sumarme como voluntario', 'fb', 'violeta', 'Al equipo'],
+          ['Ana G.', '¿Qué proponen para el transporte?', 'ig', 'azul', 'Respondido'], ['Jorge P.', '¿Dónde voto?', 'fb', 'azul', 'Respondido'], ['Comentario en Oficial', 'Spam con link', 'yt', 'gris', 'Oculto'],
+          ['Sofía M.', 'Me encantó el video de la plaza', 'tt', 'azul', 'Respondido'], ['Ramiro T.', '¿Van a arreglar la calle 12?', 'ig', 'azul', 'Respondido'], ['Carla D.', 'Tengo un reclamo de la escuela', 'fb', 'violeta', 'Al equipo'],
+          ['Hugo L.', '¿Hay acto el viernes?', 'ig', 'azul', 'Respondido'], ['Comentario en Distrito', 'Insulto', 'fb', 'gris', 'Oculto'], ['Paula N.', '¿Cómo me inscribo de fiscal?', 'ig', 'violeta', 'Al equipo'],
+          ['Diego F.', 'Buenísima la propuesta de seguridad', 'tt', 'azul', 'Respondido'], ['Inés C.', '¿Qué pasa con el hospital?', 'fb', 'azul', 'Respondido'], ['Martín Q.', 'Pásenme el link del vivo', 'yt', 'azul', 'Respondido'],
+          ['Comentario en Clips', 'Spam', 'ig', 'gris', 'Oculto'], ['Lorena V.', '¿Viene a Villa Sur?', 'ig', 'azul', 'Respondido'], ['Tomás B.', 'Quiero ayudar a repartir', 'fb', 'violeta', 'Al equipo'],
+          ['Julia E.', '¿Qué opina de las tarifas?', 'tt', 'azul', 'Respondido'], ['Andrés K.', 'Gracias por venir al club', 'ig', 'azul', 'Respondido'], ['Comentario en Equipo', 'Insulto', 'tt', 'gris', 'Oculto'],
+          ['Vero S.', '¿A qué hora es la caminata?', 'ig', 'azul', 'Respondido'], ['Nico R.', '¿Tienen un PDF de propuestas?', 'fb', 'azul', 'Respondido'], ['Marta R.', '¿Cuándo viene al barrio?', 'ig', 'azul', 'Respondido']];
+        const cols = ['#5970ff', '#8a5300', '#00a862', '#5a2fc0', '#c62b3b', '#2a35c9'];
+        const filas = gente.map(([n, p, r, c, e], i) => `<div class="conv"><span class="av" style="background:${cols[i % cols.length]}">${n.split(' ').map(x => x[0]).join('').slice(0, 2).toUpperCase()}</span>${red(r)}<div><b>${n}</b><p>${p}</p></div><span class="chip ${c}">${e}</span></div>`).join('');
+        const y = -((gente.length - 1) * 62);
+        return `<div class="msj">
+          <div class="contadores"><span><b>214</b> respondidos hoy</span><span><b>37</b> ocultos</span><span><b>12</b> al equipo</span></div>
+          <div class="bandeja"><div class="lista" style="--y:${y}px">${filas}</div></div>
+          <div class="abierto">
+            <div class="cab"><span class="av">MR</span><div><b>Marta R.</b><span>Privado · cuenta Recorridas</span></div>${red('ig')}</div>
+            <div class="chat">
+              <div class="bur ellos in" style="--d:4.8s">Hola, ¿cuándo viene al barrio? Queremos preguntarle por la plaza.</div>
+              <div class="escribe" style="--d:5.4s;--h:6.9s"><i></i><i></i><i></i></div>
+              <div class="bur nos in" style="--d:7s">¡Hola Marta! El sábado a las 11 está en la plaza Belgrano. Va a haber un momento para preguntas, así que llevá la tuya.</div>
+              <span class="chip verde pop" style="--d:7.7s">Verificado: dato aprobado por la campaña</span>
+              <div class="bur ellos in" style="--d:8.6s">¡Genial, ahí vamos con los chicos!</div>
+            </div>
+          </div>
+        </div>`;
+      }
     },
     {
-      nav: 'Métricas', icon: 'metricas', dur: 10,
+      nav: 'Métricas', icon: 'metricas', dur: 12,
       t: 'Métricas', l: 'Últimos 7 días · todas las cuentas',
-      cap: ['Medición', 'Lo medido hoy es <em>lo que se graba mañana</em>'],
+      cap: 'Lo medido hoy es lo que se graba mañana',
       html: () => `
       <div class="kpis">
-        ${[['64 %', '+9', 'Retención a los 3 s'], ['31 %', '+6', 'Vistos completos'], ['2,4×', '', 'Compartidos vs. semana anterior'], ['+1.180', '', 'Seguidores nuevos']]
-          .map(([v, d, l], i) => `<div class="card kpi in" style="--d:${.2 + i * .25}s"><div class="v">${v}</div>${d ? `<div class="d">${d} puntos</div>` : '<div class="d">&nbsp;</div>'}<div class="l">${l}</div></div>`).join('')}
+        ${[['412 mil', '+38 %', 'Alcance en el público'], ['64 %', '+9 pts', 'Retención a los 3 s'], ['31 %', '+6 pts', 'Vistos completos'], ['2,4×', 'vs. semana', 'Compartidos'], ['+1.180', '+22 %', 'Seguidores nuevos'], ['3.920', '+17 %', 'Comentarios']]
+          .map(([v, d, l], i) => `<div class="card kpi in" style="--d:${.15 + i * .18}s"><div class="v">${v}</div><div class="d">${d}</div><div class="l">${l}</div></div>`).join('')}
       </div>
-      <div class="dos">
-        <div class="card in ocultar-angosto" style="--d:1.2s">
-          <div class="card-h"><b>Alcance en el público objetivo</b><span class="small">por día</span></div>
-          <svg class="spark" viewBox="0 0 320 120" preserveAspectRatio="none" role="img" aria-label="Alcance creciente en la semana">
-            <line class="grid" x1="0" y1="30" x2="320" y2="30"/><line class="grid" x1="0" y1="65" x2="320" y2="65"/><line class="grid" x1="0" y1="100" x2="320" y2="100"/>
-            <path class="area" d="M0 96 L53 88 L107 90 L160 70 L213 62 L267 44 L320 26 L320 120 L0 120 Z"/>
-            <path class="lin" style="--d:1.4s" d="M0 96 L53 88 L107 90 L160 70 L213 62 L267 44 L320 26"/>
-            <circle class="pto" cx="316" cy="27" r="4"/>
+      <div class="graf">
+        <div class="card in" style="--d:1.2s">
+          <div class="card-h"><b>Alcance por día</b><span class="small">miles</span></div>
+          <svg class="chart" viewBox="0 0 340 150" role="img" aria-label="Alcance y seguidores en la semana">
+            <line class="grid" x1="26" y1="20" x2="336" y2="20"/><line class="grid" x1="26" y1="60" x2="336" y2="60"/><line class="grid" x1="26" y1="100" x2="336" y2="100"/><line class="grid" x1="26" y1="130" x2="336" y2="130"/>
+            <text x="0" y="24">80</text><text x="0" y="64">50</text><text x="0" y="104">20</text>
+            <path class="area" style="--d:1.6s" d="M30 112 L80 104 L130 106 L180 84 L230 74 L280 52 L330 30 L330 130 L30 130 Z"/>
+            <path class="lin" style="--d:1.4s" d="M30 112 L80 104 L130 106 L180 84 L230 74 L280 52 L330 30"/>
+            <path class="lin2" style="--d:1.8s" d="M30 122 L80 119 L130 116 L180 110 L230 104 L280 96 L330 86"/>
+            <circle class="pto" cx="330" cy="30" r="4"/>
+            ${['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((d, i) => `<text x="${27 + i * 50}" y="148">${d}</text>`).join('')}
           </svg>
+          <div class="ley"><span><i style="background:var(--blue-2)"></i>Alcance</span><span><i style="background:var(--green)"></i>Seguidores nuevos</span></div>
         </div>
-        <div class="card in" style="--d:2.4s">
-          <div class="card-h"><b>Para grabar mañana</b><span class="chip azul pop" style="--d:2.8s">Nuevo</span></div>
+        <div class="card in" style="--d:1.6s">
+          <div class="card-h"><b>Alcance por red</b><span class="small">del total</span></div>
+          <div class="redes-b">
+            ${[['ig', 'Instagram', 34], ['yt', 'YouTube', 28], ['tt', 'TikTok', 22], ['fb', 'Facebook', 16]].map(([k, n, p], i) =>
+              `<div class="r">${red(k)}<div><div class="small" style="margin-bottom:4px">${n}</div><div class="barra-h"><i style="--a:0%;--b:${p * 2.4}%;--d:${2 + i * .2}s"></i></div></div><span class="p">${p} %</span></div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="graf">
+        <div class="card in" style="--d:2.6s">
+          <div class="card-h"><b>Retención a los 3 s por cuenta</b><span class="small">%</span></div>
+          <div class="barras-v">
+            ${[['Clips', 78], ['Recorridas', 71], ['Oficial', 64], ['Propuestas', 58], ['Equipo', 55], ['Distrito', 47]].map(([n, p], i) =>
+              `<div><em>${p}</em><i class="${i === 0 ? 'top' : ''}" style="height:${p * 1.2}px;--d:${3 + i * .15}s"></i><span>${n}</span></div>`).join('')}
+          </div>
+        </div>
+        <div class="card in" style="--d:3.4s">
+          <div class="card-h"><b>Para grabar mañana</b><span class="chip azul pop" style="--d:3.8s">Nuevo</span></div>
           <ol class="manana">
-            <li class="in" data-n="1" style="--d:3.2s"><div>Más respuestas cortas a vecinos<div class="det">retienen el doble que los discursos</div></div></li>
-            <li class="in" data-n="2" style="--d:4s"><div>Abrir con la frase, no con el plano<div class="det">el gancho de frase ganó en tres de cuatro redes</div></div></li>
-            <li class="in" data-n="3" style="--d:4.8s"><div>Menos de 40 segundos en TikTok<div class="det">después de los 40 se va la mitad</div></div></li>
+            <li class="in" data-n="1" style="--d:4.2s"><div>Más respuestas cortas a vecinos<div class="det">retienen el doble que los discursos</div></div></li>
+            <li class="in" data-n="2" style="--d:4.9s"><div>Abrir con la frase, no con el plano<div class="det">el gancho de frase ganó en tres de cuatro redes</div></div></li>
+            <li class="in" data-n="3" style="--d:5.6s"><div>Menos de 40 segundos en TikTok<div class="det">después de los 40 se va la mitad</div></div></li>
           </ol>
         </div>
       </div>`
     },
   ];
 
-  // ---- motor de la demo ----
+  // ---------- reloj único: todas las animaciones se pausan y se ubican en el tiempo ----------
   const navs = $('navs'), pane = $('pane'), pasos = $('pasos'), prog = $('prog');
+  const logo = () => `<span class="marca"><svg><use href="#logo"/></svg>Multicuenta</span>`;
+  const INTRO = { kind: 'tapa', dur: 3.6, html: () => `${logo()}<h3>Administración automática de contenido multicuenta</h3><p>Se graba una vez. Se publica en todo el ecosistema del candidato.</p>` };
+  const OUTRO = { kind: 'tapa', fin: true, dur: 5.5, html: () => `${logo()}<h3 style="font-size:7.4cqw">Presente todos los días, en todas las redes</h3><div class="apps-r">${['yt', 'ig', 'fb', 'tt'].map((k, i) => `<span style="--d:${.9 + i * .18}s">${red(k)}</span>`).join('')}</div>` };
+  const segHome = scenes.map(s => ({ kind: 'scene', s, dur: s.dur }));
+  const segReel = [INTRO, ...segHome, OUTRO];
+
+  let segs = segHome, starts = [], total = 0, t = 0, playing = !reduce, cur = -1, enReel = false, last = 0;
+  const armar = list => { segs = list; starts = []; total = 0; for (const s of list) { starts.push(total); total += s.dur; } cur = -1; };
+  armar(segHome);
+
+  const inView = el => { const r = el.getBoundingClientRect(); return r.top < innerHeight * .6 && r.bottom > innerHeight * .4; };
   scenes.forEach((s, i) => {
     const b = document.createElement('button');
-    b.type = 'button'; b.className = 'nav'; b.dataset.i = i;
+    b.type = 'button'; b.className = 'nav';
     b.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="${ic[s.icon]}"/></svg><span>${s.nav}</span>`;
-    b.addEventListener('click', () => ir(i, true));
+    b.addEventListener('click', () => irEscena(i));
     navs.appendChild(b);
     const p = document.createElement('button');
-    p.type = 'button'; p.textContent = s.nav; p.dataset.i = i; p.setAttribute('aria-pressed', 'false');
-    p.addEventListener('click', () => ir(i, true));
+    p.type = 'button'; p.textContent = s.nav; p.setAttribute('aria-pressed', 'false');
+    p.addEventListener('click', () => { irEscena(i); if (!inView($('demo'))) $('demo').scrollIntoView({ behavior: 'smooth', block: 'center' }); });
     pasos.appendChild(p);
+    const j = document.createElement('button');
+    j.type = 'button'; j.textContent = s.nav;
+    j.addEventListener('click', () => irEscena(i));
+    $('saltos').appendChild(j);
   });
 
-  // Si la escena no entra (celular, 9:16), la app baja sola acompañando lo que va apareciendo.
-  let bajando = 0;
-  const bajar = dur => {
-    cancelAnimationFrame(bajando);
-    if (reduce) return;
-    const t0 = performance.now() + 1500, largo = Math.max(1, dur - 3.2) * 1000;
-    const paso = now => {
-      const max = pane.scrollHeight - pane.clientHeight;
-      if (max <= 4) return;
-      const x = Math.min(1, Math.max(0, (now - t0) / largo));
-      pane.scrollTop = max * (x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
-      if (x < 1) bajando = requestAnimationFrame(paso);
-    };
-    bajando = requestAnimationFrame(paso);
-  };
-  let actual = 0, timer = null, pausado = reduce, enReel = false, reelPaso = null;
-  const mostrar = i => {
-    actual = i;
-    const s = scenes[i];
-    navs.querySelectorAll('.nav').forEach((b, k) => b.classList.toggle('on', k === i));
-    pasos.querySelectorAll('button').forEach((b, k) => b.setAttribute('aria-pressed', String(k === i)));
+  const capH = $('capH'), tapa = $('tapa');
+  const construir = i => {
+    const seg = segs[i];
+    if (seg.kind === 'tapa') {
+      tapa.className = 'tapa' + (seg.fin ? ' fin' : '');
+      tapa.innerHTML = seg.html(); tapa.hidden = false;
+      return;
+    }
+    tapa.hidden = true;
+    const s = seg.s, k = scenes.indexOf(s);
+    navs.querySelectorAll('.nav').forEach((b, x) => b.classList.toggle('on', x === k));
+    pasos.querySelectorAll('button').forEach((b, x) => b.setAttribute('aria-pressed', String(x === k)));
+    $('saltos').querySelectorAll('button').forEach((b, x) => b.classList.toggle('on', x === k));
     $('tt').textContent = s.t; $('tl').textContent = s.l;
-    pane.innerHTML = s.html(); pane.scrollTop = 0; bajar(s.dur);
-    prog.style.transition = 'none'; prog.style.width = '0';
-    if (!pausado) { void prog.offsetWidth; prog.style.transition = `width ${s.dur}s linear`; prog.style.width = '100%'; }
+    capH.textContent = s.cap;
+    capH.style.animation = 'none'; void capH.offsetWidth; capH.style.animation = '';
+    pane.innerHTML = s.html(); pane.scrollTop = 0;
   };
-  const programar = () => {
-    clearTimeout(timer);
-    if (pausado || enReel) return;
-    timer = setTimeout(() => { mostrar((actual + 1) % scenes.length); programar(); }, scenes[actual].dur * 1000);
-  };
-  const ir = (i, desdeUsuario) => {
-    if (enReel) return;
-    mostrar(i); programar();
-    if (desdeUsuario && !inView($('demo'))) $('demo').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
-  };
-  const inView = el => { const r = el.getBoundingClientRect(); return r.top < innerHeight * .6 && r.bottom > innerHeight * .4; };
-  $('pausa').addEventListener('click', e => {
-    pausado = !pausado;
-    e.currentTarget.textContent = pausado ? 'Reproducir' : 'Pausar';
-    e.currentTarget.setAttribute('aria-pressed', String(pausado));
-    mostrar(actual); programar();
-  });
-  document.querySelectorAll('[data-ir]').forEach(b => b.addEventListener('click', () => ir(+b.dataset.ir, true)));
-  if (reduce) $('pausa').textContent = 'Reproducir';
-  mostrar(0); programar();
+  const suave = x => x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+  const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 
-  // ---- modos ----
+  const dibujar = () => {
+    let i = segs.length - 1;
+    for (let k = 0; k < segs.length; k++) if (t < starts[k] + segs[k].dur) { i = k; break; }
+    if (i !== cur) { construir(i); cur = i; }
+    const local = Math.max(0, t - starts[i]), seg = segs[i];
+    const raices = seg.kind === 'tapa' ? [tapa] : [pane, $('cap')];
+    for (const r of raices) for (const a of r.getAnimations({ subtree: true })) { a.pause(); a.currentTime = local * 1000; }
+    if (seg.kind === 'scene') {
+      prog.style.width = (Math.min(1, local / seg.dur) * 100) + '%';
+      const max = pane.scrollHeight - pane.clientHeight;
+      if (!seg.s.noScroll && max > 4) pane.scrollTop = max * suave(Math.min(1, Math.max(0, (local - 1.6) / Math.max(1, seg.dur - 3.6))));
+    }
+    if (enReel) {
+      $('barra').value = Math.round(t / total * 1000);
+      $('tAct').textContent = fmt(t); $('tTot').textContent = fmt(total);
+    }
+  };
+
+  const tick = now => {
+    const dt = last ? Math.min(0.1, (now - last) / 1000) : 0; last = now;
+    if (playing && !RENDER) {
+      t += dt;
+      if (t >= total) {
+        if (enReel) { t = total - 0.001; playing = false; botones(); }
+        else t = t % total;
+      }
+    }
+    if (!RENDER) dibujar();
+    requestAnimationFrame(tick);
+  };
+
+  const botones = () => {
+    $('pausa').textContent = playing ? 'Pausar' : 'Reproducir';
+    $('pausa').setAttribute('aria-pressed', String(!playing));
+    $('pp').textContent = playing ? '❚❚' : '▶';
+    $('pp').setAttribute('aria-label', playing ? 'Pausar' : 'Reproducir');
+  };
+  const alternar = () => { if (!playing && enReel && t >= total - 0.01) t = 0; playing = !playing; botones(); };
+  const irEscena = k => { const i = segs.findIndex(s => s.s === scenes[k]); t = starts[i] + 0.001; cur = -1; };
+  $('pausa').addEventListener('click', alternar);
+  $('pp').addEventListener('click', alternar);
+  $('barra').addEventListener('input', e => { t = Math.min(total - 0.001, (+e.target.value / 1000) * total); });
+  document.querySelectorAll('[data-ir]').forEach(b => b.addEventListener('click', () => { irEscena(+b.dataset.ir); $('demo').scrollIntoView({ behavior: 'smooth', block: 'center' }); }));
+
+  // ---------- modos ----------
   const modos = [
     ['Consejos', 'Analiza y recomienda; no toca nada. Ideal para el arranque, mientras la campaña gana confianza.'],
     ['Con permiso', 'Prepara cada cambio con su motivo y espera el sí del responsable. Es la operación normal.'],
@@ -693,54 +812,43 @@ button { font: inherit; color: inherit; cursor: pointer; }
   document.querySelectorAll('#seg button').forEach(b => b.addEventListener('click', () => modo(+b.dataset.m)));
   modo(1);
 
-  // ---- modo reel: 9:16 para grabar la pantalla (~55 s) ----
-  const reel = $('reel'), lienzo = $('lienzo'), ventana = $('ventana'), demo = $('demo'), salir = $('salir'), portada = $('portadaR');
-  const logo = '<span class="marca"><svg><use href="#logo"/></svg>Multicuenta</span>';
-  const intro = `${logo}<h3>Administración automática de contenido <em>multicuenta</em></h3><p>Se graba una vez. Se publica en todo el ecosistema del candidato.</p>`;
-  const outro = `${logo}<h3>Presente todos los días, <em>en todas las redes</em></h3><p>Grabación, edición, publicación, pauta y medición en un mismo ciclo.</p><div class="url-r">multicuenta.punchi.dev</div><div class="redes"><span>YouTube</span><span>Instagram</span><span>Facebook</span><span>TikTok</span></div>`;
-  const ajustar = () => {
-    // La app se ve como en un celular: 390 px de ancho lógico dentro del cuadro.
-    const w = $('cuadro').clientWidth * .91;
-    lienzo.style.setProperty('--z', (w / 410).toFixed(3));
-  };
-  const tapa = (html, ms, sig) => {
-    portada.innerHTML = html; portada.hidden = false;
-    reelPaso = setTimeout(sig, ms);
-  };
-  const escena = i => {
-    if (i >= scenes.length) return tapa(outro, 6000, () => {});
-    portada.hidden = true;
-    const s = scenes[i], cap = $('cap');
-    $('capK').textContent = `${i + 1} de ${scenes.length} · ${s.cap[0]}`;
-    $('capH').innerHTML = s.cap[1];
-    cap.classList.remove('cambia'); void cap.offsetWidth; cap.classList.add('cambia');
-    mostrar(i);
-    reelPaso = setTimeout(() => escena(i + 1), s.dur * 1000);
-  };
-  const empezar = () => { clearTimeout(reelPaso); tapa(intro, 3800, () => escena(0)); };
+  // ---------- modo reel ----------
+  const reel = $('reel'), lienzo = $('lienzo'), ventana = $('ventana'), demo = $('demo'), ctl = $('controles');
+  const ajustar = () => { lienzo.style.setProperty('--z', ($('cuadro').clientWidth * .93 / 400).toFixed(3)); };
   const abrirReel = () => {
-    enReel = true; clearTimeout(timer);
-    lienzo.appendChild(ventana); reel.hidden = false; salir.hidden = false;
+    enReel = true; lienzo.appendChild(ventana); reel.hidden = false; ctl.hidden = RENDER;
     document.body.style.overflow = 'hidden';
-    ajustar(); empezar(); quieto();
-    try { history.replaceState(null, '', '#reel'); } catch (e) {}
+    armar(segReel); t = 0; playing = !RENDER; botones(); ajustar(); quieto();
+    try { history.replaceState(null, '', location.pathname + location.search + '#reel'); } catch (e) {}
   };
   const cerrarReel = () => {
-    clearTimeout(reelPaso); enReel = false;
-    demo.insertBefore(ventana, demo.firstChild); reel.hidden = true; salir.hidden = true;
+    enReel = false; demo.insertBefore(ventana, demo.firstChild); reel.hidden = true; ctl.hidden = true; tapa.hidden = true;
     document.body.style.overflow = '';
-    try { history.replaceState(null, '', location.pathname); } catch (e) {}
-    mostrar(0); programar();
+    armar(segHome); t = 0; playing = !reduce; botones();
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
   };
   let qt;
-  const quieto = () => { salir.classList.remove('quieto'); clearTimeout(qt); qt = setTimeout(() => salir.classList.add('quieto'), 1800); };
+  const quieto = () => { ctl.classList.remove('quieto'); clearTimeout(qt); qt = setTimeout(() => { if (playing) ctl.classList.add('quieto'); }, 2200); };
   addEventListener('mousemove', () => { if (enReel) quieto(); });
+  addEventListener('touchstart', () => { if (enReel) quieto(); }, { passive: true });
   addEventListener('resize', () => { if (enReel) ajustar(); });
-  addEventListener('keydown', e => { if (!enReel) return; if (e.key === 'Escape') cerrarReel(); if (e.key === 'r' || e.key === 'R') empezar(); });
+  addEventListener('keydown', e => {
+    if (!enReel) return;
+    if (e.key === 'Escape') cerrarReel();
+    else if (e.key === ' ') { e.preventDefault(); alternar(); quieto(); }
+    else if (e.key === 'ArrowRight') { t = Math.min(total - .01, t + 2); quieto(); }
+    else if (e.key === 'ArrowLeft') { t = Math.max(0, t - 2); quieto(); }
+    else if (e.key === 'r' || e.key === 'R') { t = 0; playing = true; botones(); }
+  });
   document.querySelectorAll('[data-reel]').forEach(b => b.addEventListener('click', abrirReel));
   $('cerrarReel').addEventListener('click', cerrarReel);
-  $('reiniciar').addEventListener('click', empezar);
-  if (location.hash === '#reel') abrirReel();
+
+  // Para exportar el video cuadro por cuadro: ?render#reel deja la página quieta y expone el reloj.
+  window.__reel = { total: () => total, frame: s => { t = Math.min(total - 0.001, s); dibujar(); } };
+
+  botones();
+  if (location.hash === '#reel' || RENDER) abrirReel();
+  requestAnimationFrame(tick);
 })();
 </script>
 </body>
