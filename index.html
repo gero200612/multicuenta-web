@@ -71,9 +71,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .av { width: 30px; height: 30px; border-radius: 50%; background: var(--sky); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 12.5px; flex: none; }
 
 .main { min-width: 0; display: flex; flex-direction: column; background: var(--bg); }
-.tbar { padding: 22px 26px 18px; background: var(--surface); border-bottom: 1px solid var(--line); }
-.tbar h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
-.tbar p { font-size: 14px; color: var(--muted); margin-top: 4px; }
 .prog { height: 3px; background: var(--line); flex: none; }
 .prog i { display: block; height: 100%; width: 0; background: var(--blue-2); }
 .pane { flex: 1; min-height: 0; overflow: hidden; padding: 20px 24px; position: relative; }
@@ -239,8 +236,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
   .nav.on span { display: inline; }
   .nav.on { flex: 2.3; }
   .nav.on::before { left: 8px; right: 8px; top: auto; bottom: -10px; width: auto; height: 3px; border-radius: 3px 3px 0 0; }
-  .tbar { padding: 16px 16px 14px; }
-  .tbar h2 { font-size: 26px; }
   .pane { padding: 12px 14px; height: 600px; flex: none; }
   .msj { inset: 12px 14px; }
   .dos, .graf { grid-template-columns: minmax(0, 1fr); }
@@ -253,6 +248,14 @@ button { font: inherit; color: inherit; cursor: pointer; }
   .mini { width: calc(50% - 2px); }
   .cal .cta b { font-size: 13px; }
 }
+
+/* encabezado de la sección, arriba de la app */
+.encabezado { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; color: #fff; }
+.enc-t { min-width: 0; }
+.encabezado h3 { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+.encabezado p { font-size: 15px; color: var(--side-ink); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.encabezado .marca { flex: none; }
+@media (max-width: 600px) { .encabezado .marca { font-size: 0; gap: 0; } }
 
 /* controles debajo de la demo */
 .ctrl { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 16px; }
@@ -298,8 +301,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .reel { position: fixed; inset: 0; z-index: 100; background: #0b0b26; display: grid; place-items: center; }
 .reel[hidden] { display: none !important; }
 .cuadro { position: relative; height: min(100vh, 100dvh, calc(100vw * 16 / 9)); aspect-ratio: 9 / 16; max-width: 100%; background: var(--navy); color: #fff; overflow: hidden; display: flex; flex-direction: column; container-type: size; }
-.cuadro .cap { padding: 6cqh 6.5cqw 2.6cqh; }
-.cuadro .cap h3 { font-size: 6.8cqw; line-height: 1.06; letter-spacing: -0.04em; font-weight: 700; text-wrap: balance; animation: aparece .5s cubic-bezier(.2,.8,.2,1) both; }
+.cuadro .cap { display: flex; align-items: center; justify-content: space-between; gap: 4cqw; padding: 5.5cqh 6cqw 2.6cqh; }
+.cuadro .cap-t { min-width: 0; }
+.cuadro .cap h3 { font-size: 8.6cqw; line-height: 1.05; letter-spacing: -0.04em; font-weight: 700; animation: aparece .5s cubic-bezier(.2,.8,.2,1) both; }
+.cuadro .cap p { font-size: 3.7cqw; color: var(--side-ink); margin-top: .8cqh; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; animation: aparece .5s .12s cubic-bezier(.2,.8,.2,1) both; }
+.cuadro .cap-logo { width: 13cqw; height: 13cqw; flex: none; }
 .cuadro .lienzo { flex: 1; min-height: 0; padding: 0 3.5cqw 3.5cqw; }
 .cuadro .lienzo .ventana { border-radius: 3cqw; height: 100%; display: flex; flex-direction: column; }
 .cuadro .lienzo .ventana .barra-v { display: none; }
@@ -393,6 +399,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
     </div>
 
     <div id="demo">
+      <div class="encabezado"><div class="enc-t"><h3 id="encH">Contenido</h3><p id="encP"></p></div><span class="marca"><svg width="30" height="30"><use href="#logo"/></svg>Multicuenta</span></div>
       <div class="ventana" id="ventana">
         <div class="barra-v"><i></i><i></i><i></i></div>
         <div class="app" id="app">
@@ -403,14 +410,13 @@ button { font: inherit; color: inherit; cursor: pointer; }
               <div class="pie"><span class="av">EC</span><span><b>Equipo de campaña</b>Con permiso</span></div>
             </aside>
             <div class="main">
-              <div class="tbar"><h2 id="tt">Contenido</h2><p id="tl"></p></div>
               <div class="prog"><i id="prog"></i></div>
               <div class="pane" id="pane"></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="ctrl">
+      <div class="ctrl" id="ctrlDemo">
         <div class="pasos-demo" id="pasos" role="group" aria-label="Partes de la demo"></div>
         <button class="btn sm" type="button" id="pausa" aria-pressed="false">Pausar</button>
       </div>
@@ -497,7 +503,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 <div class="reel" id="reel" hidden>
   <div class="cuadro" id="cuadro">
-    <div class="cap" id="cap"><h3 id="capH"></h3></div>
+    <div class="cap" id="cap"><div class="cap-t"><h3 id="capH"></h3><p id="capP"></p></div><svg class="cap-logo" aria-label="Multicuenta"><use href="#logo"/></svg></div>
     <div class="lienzo" id="lienzo"></div>
     <div class="tapa" id="tapa" hidden></div>
   </div>
@@ -533,7 +539,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
   const scenes = [
     {
-      nav: 'Contenido', icon: 'contenido', dur: 10,
+      nav: 'Contenido', d: 'Una toma, tres versiones para aprobar', icon: 'contenido', dur: 10,
       t: 'Contenido', l: 'Pedido de hoy · Recorrida por Barrio Norte',
       cap: 'Una toma cruda, tres versiones listas',
       html: () => `
@@ -565,7 +571,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
       </div>`
     },
     {
-      nav: 'Cuentas', icon: 'cuentas', dur: 11,
+      nav: 'Cuentas', d: 'Varias versiones por día en cada cuenta', icon: 'cuentas', dur: 11,
       t: 'Cuentas', l: 'Calendario del ecosistema · hoy',
       cap: 'Cada cuenta, varias versiones por día',
       html: () => {
@@ -595,7 +601,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
       }
     },
     {
-      nav: 'Pauta', icon: 'pauta', dur: 9,
+      nav: 'Pauta', d: 'La inversión va a la versión que rinde', icon: 'pauta', dur: 9,
       t: 'Pauta', l: 'Modo con permiso · pieza «Recorrida Barrio Norte»',
       cap: 'La inversión va a lo que rinde',
       html: () => `
@@ -623,7 +629,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
       </div>`
     },
     {
-      nav: 'Mensajes', icon: 'mensajes', dur: 11, noScroll: true,
+      nav: 'Mensajes', d: 'Cientos de mensajes, al momento', icon: 'mensajes', dur: 11, noScroll: true,
       t: 'Mensajes', l: 'Comentarios y privados de las 6 cuentas',
       cap: 'Cientos de mensajes, respondidos al momento',
       html: () => {
@@ -655,7 +661,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
       }
     },
     {
-      nav: 'Métricas', icon: 'metricas', dur: 12,
+      nav: 'Métricas', d: 'Lo medido hoy se graba mañana', icon: 'metricas', dur: 12,
       t: 'Métricas', l: 'Últimos 7 días · todas las cuentas',
       cap: 'Lo medido hoy es lo que se graba mañana',
       html: () => `
@@ -747,9 +753,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
     navs.querySelectorAll('.nav').forEach((b, x) => b.classList.toggle('on', x === k));
     pasos.querySelectorAll('button').forEach((b, x) => b.setAttribute('aria-pressed', String(x === k)));
     $('saltos').querySelectorAll('button').forEach((b, x) => b.classList.toggle('on', x === k));
-    $('tt').textContent = s.t; $('tl').textContent = s.l;
-    capH.textContent = s.cap;
-    capH.style.animation = 'none'; void capH.offsetWidth; capH.style.animation = '';
+    capH.textContent = s.nav; $('capP').textContent = s.d;
+    $('encH').textContent = s.nav; $('encP').textContent = s.d;
+    for (const el of [capH, $('capP')]) { el.style.animation = 'none'; void el.offsetWidth; el.style.animation = ''; }
     pane.innerHTML = s.html(); pane.scrollTop = 0;
   };
   const suave = x => x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
@@ -822,7 +828,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
     try { history.replaceState(null, '', location.pathname + location.search + '#reel'); } catch (e) {}
   };
   const cerrarReel = () => {
-    enReel = false; demo.insertBefore(ventana, demo.firstChild); reel.hidden = true; ctl.hidden = true; tapa.hidden = true;
+    enReel = false; demo.insertBefore(ventana, $('ctrlDemo')); reel.hidden = true; ctl.hidden = true; tapa.hidden = true;
     document.body.style.overflow = '';
     armar(segHome); t = 0; playing = !reduce; botones();
     try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
