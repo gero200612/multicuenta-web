@@ -42,10 +42,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .btn.line:hover { background: rgba(255,255,255,.08); }
 .btn.sm { height: 34px; padding: 0 12px; font-size: 13.5px; border-radius: 8px; }
 
-.hero { background: linear-gradient(var(--navy) 0 340px, var(--bg) 340px); color: #fff; }
-.titulo-h { color: var(--ink); text-align: center; margin-top: 48px; display: grid; justify-items: center; gap: 10px; }
+.hero { background: linear-gradient(var(--navy) 0 560px, var(--bg) 560px); color: #fff; }
+.titulo-h { color: #fff; text-align: center; margin: 24px 0 44px; display: grid; justify-items: center; gap: 10px; }
 .titulo-h h1 { font-size: clamp(36px, 5.4vw, 64px); line-height: 1; letter-spacing: -0.045em; font-weight: 700; }
-.titulo-h p { font-size: 19px; color: var(--muted); }
+.titulo-h p { font-size: 19px; color: var(--side-ink); }
 .titulo-h .apps { margin-top: 6px; }
 .hero .wrap { padding-block: 28px 64px; display: grid; gap: 34px; }
 .hero .txt { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px 56px; align-items: end; }
@@ -275,10 +275,13 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .cierre { background: var(--navy); color: #fff; }
 .cierre .wrap { padding-block: 88px; display: grid; justify-items: center; text-align: center; gap: 40px; }
 .cierre h2 { font-size: clamp(34px, 5vw, 60px); line-height: 1; letter-spacing: -0.045em; font-weight: 700; }
-.redes-fin { display: flex; flex-wrap: wrap; justify-content: center; gap: 28px 40px; }
-.redes-fin div { display: grid; justify-items: center; gap: 10px; }
-.redes-fin svg { width: 72px; height: 72px; }
-.redes-fin span { font-size: 15px; font-weight: 600; color: var(--side-ink); }
+.sub-fin { color: var(--side-ink); font-size: 18px; margin-top: -24px; }
+.redes-fin { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 28px; width: 100%; max-width: 1080px; }
+.redes-fin div { display: grid; justify-items: center; gap: 8px; align-content: start; }
+.redes-fin svg { width: 68px; height: 68px; margin-bottom: 4px; }
+.redes-fin b { font-size: 17px; }
+.redes-fin span { font-size: 14px; color: var(--side-ink); max-width: 22ch; line-height: 1.45; }
+@media (max-width: 900px) { .redes-fin { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* ---------- Modo reel (9:16) ---------- */
 .reel { position: fixed; inset: 0; z-index: 100; background: #0b0b26; display: grid; place-items: center; }
@@ -453,7 +456,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   <symbol id="i-ig" viewBox="0 0 24 24"><rect x="1.5" y="1.5" width="21" height="21" rx="6" fill="url(#g-ig)"/><rect x="6" y="6" width="12" height="12" rx="4" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="2.9" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="16.6" cy="7.4" r="1.1" fill="#fff"/></symbol>
   <symbol id="i-fb" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#1877f2"/><path d="M13.4 22.9v-7.6h2.5l.4-3h-2.9v-1.9c0-.9.3-1.5 1.5-1.5h1.6V6.2c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.5v7.4z" fill="#fff"/></symbol>
   <symbol id="i-tt" viewBox="0 0 24 24"><rect x="1.5" y="1.5" width="21" height="21" rx="6" fill="#111"/><path d="M15.2 5.2c.4 1.7 1.6 2.9 3.3 3.1v2.4c-1.2 0-2.3-.4-3.3-1v4.6a4.3 4.3 0 1 1-4.3-4.3v2.5a1.8 1.8 0 1 0 1.8 1.8V5.2z" fill="#25f4ee" transform="translate(-.6 -.4)"/><path d="M15.2 5.2c.4 1.7 1.6 2.9 3.3 3.1v2.4c-1.2 0-2.3-.4-3.3-1v4.6a4.3 4.3 0 1 1-4.3-4.3v2.5a1.8 1.8 0 1 0 1.8 1.8V5.2z" fill="#fe2c55" transform="translate(.6 .4)"/><path d="M15.2 5.2c.4 1.7 1.6 2.9 3.3 3.1v2.4c-1.2 0-2.3-.4-3.3-1v4.6a4.3 4.3 0 1 1-4.3-4.3v2.5a1.8 1.8 0 1 0 1.8 1.8V5.2z" fill="#fff"/></symbol>
-  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 1.6a10.3 10.3 0 0 0-8.9 15.6L1.7 22.4l5.4-1.4A10.3 10.3 0 1 0 12 1.6z" fill="#25d366"/><path d="M8.6 6.9c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.8 5.9 5.2 2.9 1.1 3.5.9 4.1.9.6-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.7-.4l-2.3-1.1c-.3-.1-.5-.2-.8.2l-1 1.3c-.2.2-.4.3-.7.1-.4-.2-1.5-.6-2.8-1.8-1-.9-1.7-2-1.9-2.4-.2-.4 0-.5.2-.7l.5-.6c.2-.2.2-.4.4-.6.1-.2 0-.4 0-.6z" fill="#fff"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><rect x="1.5" y="1.5" width="21" height="21" rx="6" fill="#25d366"/><path transform="translate(4.6 4.6) scale(.62)" fill="#fff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol>
 </svg>
 
 <header class="top">
@@ -465,6 +468,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
 <section class="hero">
   <div class="wrap">
     <div id="demo">
+      <div class="titulo-h" id="tituloH">
+        <h1>Agentes multicuenta</h1>
+        <p>Se graba una vez. Se publica en todo el ecosistema.</p>
+        <div class="apps" aria-label="YouTube, Instagram, Facebook, TikTok y WhatsApp"><svg><use href="#i-yt"/></svg><svg><use href="#i-ig"/></svg><svg><use href="#i-fb"/></svg><svg><use href="#i-tt"/></svg><svg><use href="#i-wa"/></svg></div>
+      </div>
       <div class="ventana" id="ventana">
         <div class="barra-v"><i></i><i></i><i></i></div>
         <div class="app" id="app">
@@ -479,11 +487,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
             </div>
           </div>
         </div>
-      </div>
-      <div class="titulo-h" id="tituloH">
-        <h1>Agentes multicuenta</h1>
-        <p>Se graba una vez. Se publica en todo el ecosistema.</p>
-        <div class="apps" aria-label="YouTube, Instagram, Facebook, TikTok y WhatsApp"><svg><use href="#i-yt"/></svg><svg><use href="#i-ig"/></svg><svg><use href="#i-fb"/></svg><svg><use href="#i-tt"/></svg><svg><use href="#i-wa"/></svg></div>
       </div>
     </div>
   </div>
@@ -563,8 +566,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 <section class="cierre">
   <div class="wrap">
     <h2>Estamos en todas las redes</h2>
+    <p class="sub-fin">Publicamos, respondemos y medimos en cada una, desde el mismo panel.</p>
     <div class="redes-fin">
-      <div><svg><use href="#i-yt"/></svg><span>YouTube</span></div><div><svg><use href="#i-ig"/></svg><span>Instagram</span></div><div><svg><use href="#i-fb"/></svg><span>Facebook</span></div><div><svg><use href="#i-tt"/></svg><span>TikTok</span></div><div><svg><use href="#i-wa"/></svg><span>WhatsApp</span></div>
+      <div><svg><use href="#i-yt"/></svg><b>YouTube</b><span>Shorts y videos largos, con títulos y portadas por versión</span></div><div><svg><use href="#i-ig"/></svg><b>Instagram</b><span>Reels, historias y respuestas a mensajes y comentarios</span></div><div><svg><use href="#i-fb"/></svg><b>Facebook</b><span>Reels, publicaciones y moderación de comentarios</span></div><div><svg><use href="#i-tt"/></svg><b>TikTok</b><span>Videos con sonidos en tendencia, crecimiento orgánico</span></div><div><svg><use href="#i-wa"/></svg><b>WhatsApp</b><span>Respuestas al momento y avisos a la comunidad</span></div>
     </div>
   </div>
 </section>
@@ -923,7 +927,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
     try { history.replaceState(null, '', location.pathname + location.search + '#reel'); } catch (e) {}
   };
   const cerrarReel = () => {
-    enReel = false; demo.insertBefore(ventana, $('tituloH')); reel.hidden = true; ctl.hidden = true; tapa.hidden = true;
+    enReel = false; demo.appendChild(ventana); reel.hidden = true; ctl.hidden = true; tapa.hidden = true;
     document.body.style.overflow = '';
     armar(segHome); t = 0; playing = !reduce; botones();
     try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
